@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "connect.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:build": "tsc --build",
+    "devstart": "tsx watch --exclude \"../database/**/*\" --experimental-sqlite ./src/connect.ts",
+    "serverstart": "DEBUG=.:* npm run devstart",
+    "noEmit": "tsc --noEmit",
+    "test:shop-model": "tsx --experimental-sqlite --test ./tests/shop/models/*.ts",
+    "test:shop-controller": "tsx --experimental-sqlite --test ./tests/shop/controllers/*.ts",
+    "test:product-model": "tsx --experimental-sqlite --test ./tests/product/models/*.ts",
+    "test:product-controller": "tsx --experimental-sqlite --test ./tests/product/controllers/*.ts",
+    "test:purchase-model": "tsx --experimental-sqlite --test ./tests/purchase/models/purchase.model.test.ts",
+    "test:purchase-controller": "tsx --experimental-sqlite --test ./tests/purchase/controllers/purchase.controller.test.ts",
+    "test:routes": "tsx --experimental-sqlite --test ./tests/functionalTests.test.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0"
+  },
+  "dependencies": {
+    "express": "^5.0.1",
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "extends": "../configs/tsbase",
+  "references": [
+    {
+      "path": "../shared"
+    }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@dataTypes/*": [
+        "../shared/src/types/*"
+      ],
+      "@shop/*": [
+        "./src/shop/*"
+      ],
+      "@product/*": [
+        "./src/product/*"
+      ],
+      "@configs/*": [
+        "./src/config/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@purchase/*": [
+        "./src/purchase/*"
+      ]
+    },
+    "rootDirs": [
+      "./src",
+      "./tests"
+    ],
+    "module": "node16",
+    "lib": [
+      "es2023"
+    ],
+    "moduleResolution": "node16",
+    "outDir": "./dist",
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "isolatedModules": true,
+
+    "checkJs": true,
+
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2022",
+  },
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Strictest",
+  "_version": "2.0.0"
+}
