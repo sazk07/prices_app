@@ -1,45 +1,74 @@
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
-import {
-  purchaseIdSchema,
-  purchaseSchema,
-} from "@purchase/validation/purchase.validation.js";
-import { HttpError } from "@utils/http-errors-enhanced/base.js";
-import {
-  BadRequestError,
-  InternalServerError,
-  NotFoundError,
-} from "@utils/http-errors-enhanced/errors.js";
-import { validateId, validateRequest } from "@utils/validation.js";
 import { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod";
+import { PurchaseModel } from "@purchase/models/purchase.model.js";
+import { NotFoundError } from "@utils/http-errors-enhanced/errors.js";
 
 export const updatePurchase = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  let validationError: HttpError;
   try {
-    const valId = await validateId(req, purchaseIdSchema);
-    const validatedData = await validateRequest(req, purchaseSchema);
-    const purchaseModel = await PurchaseModel.createInstance();
-    const isUpdated = await purchaseModel.update(valId, validatedData);
+    const {
+      shopId,
+      productId,
+      purchaseDate,
+      quantity,
+      price,
+      taxRate,
+      taxAmount,
+      mrpTaxAmount,
+      nonMrpTaxAmount,
+    } = req.body;
+    const { id } = req.params;
+    if (!id) {
+      throw new Error("Purchase ID not found");
+    }
+    const idNumber = parseInt(id);
+    const purchaseModel = await PurchaseModel();
+    const stmt = purchaseModel.prepare(
+      `
+      UPDATE
+        Purchase
+      SET
+        shopId = ?,
+        productId = ?,
+        purchaseDate = ?,
+        quantity = ?,
+        price = ?,
+        taxRate = ?,
+        taxAmount = ?,
+        mrpTaxAmount = ?,
+        nonMrpTaxAmount = ?,
+        editedAt = ?
+      WHERE
+        purchaseId = ?
+    `,
+    );
+    const result = await Promise.resolve(
+      stmt.run(
+        shopId,
+        productId,
+        purchaseDate,
+        quantity,
+        price,
+        taxRate ?? 0,
+        taxAmount ?? 0,
+        mrpTaxAmount ?? 0,
+        nonMrpTaxAmount ?? 0,
+        Date.now(),
+        idNumber,
+      ),
+    );
+    const isUpdated = result.changes > 0 ? true : false;
     if (!isUpdated) {
-      validationError = new NotFoundError("Purchase not found");
+      const validationError = new NotFoundError("Purchase not found");
       next(validationError);
     }
     // TODO: redirect to /purchases on update ?
     res.status(204).end();
   } catch (err) {
-    if (err instanceof ZodError) {
-      validationError = new BadRequestError("Validation Failed", {
-        errors: err.errors,
-      });
-    } else {
-      validationError = new InternalServerError({
-        error: err instanceof Error ? err.message : String(err),
-      });
-    }
-    next(validationError);
+    console.error("Error updating purchase:", err);
+    const reportedError = err instanceof Error ? err.message : String(err);
+    next(reportedError);
   }
 };

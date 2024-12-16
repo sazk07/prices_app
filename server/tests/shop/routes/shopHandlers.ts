@@ -21,6 +21,7 @@ export const shopHandlers = [
       },
     );
   }),
+  // Mock GET /shop/:id response
   http.get("http://localhost:3000/shop/1", async () => {
     return HttpResponse.json(
       {
@@ -33,6 +34,7 @@ export const shopHandlers = [
       },
     );
   }),
+  // Mock POST /shop/create response
   http.post("http://localhost:3000/shop/create", async () => {
     return HttpResponse.json(
       {
@@ -44,11 +46,13 @@ export const shopHandlers = [
       },
     );
   }),
+  // Mock PUT /shop/:id/update response
   http.put("http://localhost:3000/shop/1/update", async () => {
     return new HttpResponse(null, {
       status: 204,
     });
   }),
+  // Mock DELETE /shop/:id/delete response
   http.delete("http://localhost:3000/shop/1/delete", async () => {
     return new HttpResponse(null, {
       status: 204,

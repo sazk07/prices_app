@@ -1,13 +1,5 @@
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
-import { purchaseSchema } from "@purchase/validation/purchase.validation.js";
-import { HttpError } from "@utils/http-errors-enhanced/base.js";
-import {
-  BadRequestError,
-  InternalServerError,
-} from "@utils/http-errors-enhanced/errors.js";
-import { validateRequest } from "@utils/validation.js";
 import { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod";
+import { PurchaseModel } from "@purchase/models/purchase.model.js";
 
 export const createPurchase = async (
   req: Request,
@@ -15,25 +7,64 @@ export const createPurchase = async (
   next: NextFunction,
 ) => {
   try {
-    const validatedData = await validateRequest(req, purchaseSchema);
-    const purchaseModel = await PurchaseModel.createInstance();
-    const purchaseId = await purchaseModel.create(validatedData);
+    const {
+      shopId,
+      productId,
+      purchaseDate,
+      quantity,
+      price,
+      taxRate,
+      taxAmount,
+      mrpTaxAmount,
+      nonMrpTaxAmount,
+    } = req.body;
+    const purchaseModel = await PurchaseModel();
+    const stmt = purchaseModel.prepare(
+      `
+      INSERT INTO Purchase (
+        shopId,
+        productId,
+        purchaseDate,
+        quantity,
+        price,
+        taxRate,
+        taxAmount,
+        mrpTaxAmount,
+        nonMrpTaxAmount)
+      VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?)
+    `,
+    );
+    const result = await Promise.resolve(
+      stmt.run(
+        shopId,
+        productId,
+        purchaseDate,
+        quantity,
+        price,
+        taxRate ?? 0,
+        taxAmount ?? 0,
+        mrpTaxAmount ?? 0,
+        nonMrpTaxAmount ?? 0,
+      ),
+    );
+    const purchaseId = result.lastInsertRowid as number;
     res.statusCode = 201;
     res.json({
       message: "Purchase created successfully",
       purchaseId,
     });
   } catch (err) {
-    let validationError: HttpError;
-    if (err instanceof ZodError) {
-      validationError = new BadRequestError("Validation Failed", {
-        errors: err.errors,
-      });
-    } else {
-      validationError = new InternalServerError({
-        error: err instanceof Error ? err.message : String(err),
-      });
-    }
-    next(validationError);
+    console.error(err);
+    const reportedErr = err instanceof Error ? err.message : String(err);
+    next(reportedErr);
   }
 };

@@ -6,24 +6,21 @@ import { z, ZodError } from "zod";
 const productSchema = z.object({
   productName: z
     .string({
-      required_error: "Product name is required",
-      invalid_type_error: "Product name must be a string",
+      invalid_type_error: "Product Name must be a string",
     })
-    .min(2, { message: "Product name must be at least 2 characters long" })
+    .min(1, { message: "Product Name is required" })
     .trim(),
   productCategory: z
     .string({
-      required_error: "Product name is required",
-      invalid_type_error: "Product name must be a string",
+      invalid_type_error: "Product Category must be a string",
     })
-    .min(2, { message: "Product category must be at least 2 characters long" })
+    .min(1, { message: "Product Category is required" })
     .trim(),
   productBrand: z
     .string({
-      required_error: "Product name is required",
-      invalid_type_error: "Product name must be a string",
+      invalid_type_error: "Product Brand must be a string",
     })
-    .min(2, { message: "Product brand must be at least 2 characters long" })
+    .min(1, { message: "Product Brand is required" })
     .trim(),
 });
 

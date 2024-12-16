@@ -1,6 +1,9 @@
-import { z } from "zod";
+import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
+import { validateId, validateRequest } from "@utils/validation.js";
+import { NextFunction, Request, Response } from "express";
+import { z, ZodError } from "zod";
 
-export const purchaseSchema = z.object({
+const purchaseSchema = z.object({
   shopId: z.number({
     invalid_type_error: "Invalid Shop ID",
   }),
@@ -10,7 +13,6 @@ export const purchaseSchema = z.object({
   purchaseDate: z.string().date("Purchase Date must be a valid date").trim(),
   quantity: z
     .number({
-      required_error: "Quantity is required",
       invalid_type_error: "Quantity must be a number",
     })
     .nonnegative({
@@ -21,7 +23,6 @@ export const purchaseSchema = z.object({
     }),
   price: z
     .number({
-      required_error: "Price is required",
       invalid_type_error: "Price must be a number",
     })
     .nonnegative({
@@ -40,7 +41,9 @@ export const purchaseSchema = z.object({
     })
     .optional(),
   taxAmount: z
-    .number()
+    .number({
+      invalid_type_error: "Tax Amount must be a number",
+    })
     .nonnegative({
       message: "Tax Amount must be a non-negative number",
     })
@@ -49,7 +52,9 @@ export const purchaseSchema = z.object({
     })
     .optional(),
   mrpTaxAmount: z
-    .number()
+    .number({
+      invalid_type_error: "MRP Tax Amount must be a number",
+    })
     .nonnegative({
       message: "MRP Tax Amount must be a non-negative number",
     })
@@ -58,7 +63,9 @@ export const purchaseSchema = z.object({
     })
     .optional(),
   nonMrpTaxAmount: z
-    .number()
+    .number({
+      invalid_type_error: "Non-MRP Tax Amount must be a number",
+    })
     .nonnegative({
       message: "Non-MRP Tax Amount must be a non-negative number",
     })
@@ -68,7 +75,7 @@ export const purchaseSchema = z.object({
     .optional(),
 });
 
-export const purchaseIdSchema = z
+const purchaseIdSchema = z
   .number({
     message: "ID must be a number",
   })
@@ -81,3 +88,45 @@ export const purchaseIdSchema = z
   .nonnegative({
     message: "ID must be a non-negative number",
   });
+
+export const validatePurchaseData = async (
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+) => {
+  try {
+    await validateRequest(req, purchaseSchema);
+    next();
+  } catch (err) {
+    let validationError: string[] | InternalServerError;
+    if (err instanceof ZodError) {
+      validationError = err.issues.map((issue) => issue.message);
+    } else {
+      validationError = new InternalServerError({
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    next(validationError);
+  }
+};
+
+export const validatePurchaseId = async (
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+) => {
+  try {
+    await validateId(req, purchaseIdSchema);
+    next();
+  } catch (err) {
+    let validationError: string[] | InternalServerError;
+    if (err instanceof ZodError) {
+      validationError = err.issues.map((issue) => issue.message);
+    } else {
+      validationError = new InternalServerError({
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    next(validationError);
+  }
+};

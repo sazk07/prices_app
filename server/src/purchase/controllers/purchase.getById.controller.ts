@@ -1,41 +1,45 @@
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
-import { purchaseIdSchema } from "@purchase/validation/purchase.validation.js";
-import { HttpError } from "@utils/http-errors-enhanced/base.js";
-import {
-  BadRequestError,
-  InternalServerError,
-  NotFoundError,
-} from "@utils/http-errors-enhanced/errors.js";
-import { validateId } from "@utils/validation.js";
 import { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod";
+import { ProductOutput } from "@dataTypes/product.types.js";
+import { PurchaseModel } from "@purchase/models/purchase.model.js";
 
 export const getPurchaseById = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  let validationError: HttpError;
   try {
-    const valId = await validateId(req, purchaseIdSchema);
-    const purchaseModel = await PurchaseModel.createInstance();
-    const purchase = await purchaseModel.findById(valId);
-    if (!purchase) {
-      validationError = new NotFoundError("Purchase not found");
-      next(validationError);
+    const { id } = req.params;
+    if (!id) {
+      throw new Error("ID not found");
     }
+    const idNumber = parseInt(id);
+    const purchaseModel = await PurchaseModel();
+    const stmt = purchaseModel.prepare(
+      `
+      SELECT
+        purchaseId,
+        shopId,
+        productId,
+        purchaseDate,
+        quantity,
+        price,
+        taxRate,
+        taxAmount,
+        mrpTaxAmount,
+        nonMrpTaxAmount
+      FROM
+        Purchase
+      WHERE
+        purchaseId = ?
+    `,
+    );
+    const result = await Promise.resolve(stmt.get(idNumber));
+    const purchase = (result as ProductOutput) ?? null;
     res.statusCode = 200;
     res.json(purchase);
   } catch (err) {
-    if (err instanceof ZodError) {
-      validationError = new BadRequestError("Validation Failed", {
-        errors: err.errors,
-      });
-    } else {
-      validationError = new InternalServerError({
-        error: err instanceof Error ? err.message : String(err),
-      });
-    }
-    next(validationError);
+    console.error(err);
+    const reportedError = err instanceof Error ? err.message : String(err);
+    next(reportedError);
   }
 };
