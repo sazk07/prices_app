@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    ".": "index.js",
+    "./client": "./client/src/index.html",
     "./server": "./server/dist/connect.js"
   },
   "scripts": {
