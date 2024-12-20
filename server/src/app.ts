@@ -6,6 +6,8 @@ import notFoundRouter from "./utils/notFound.routes.js";
 import { logError, errorHandler } from "./utils/errorHandler.js";
 import connectToDatabase from "@configs/database.js";
 import homePageRouter from "./home/routers/home.routes.js";
+import cors from "cors";
+import { corsOptions } from "@utils/corsOptions.js";
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use(
     extended: true,
   }),
 );
+app.use(cors(corsOptions));
 
 app.use(homePageRouter);
 app.use(shopRouter);

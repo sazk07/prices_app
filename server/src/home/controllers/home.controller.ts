@@ -31,6 +31,7 @@ export const homePage = async (
     }
     res.statusCode = 200;
     res.json({
+      title: "Welcome to the Expense Tracker",
       countOfShops: countOfShops["Number of Shops"],
       countOfProducts: countOfProducts["Number of Products"],
       countOfPurchases: countOfPurchases["Number of Purchases"],
