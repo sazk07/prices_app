@@ -13,3 +13,7 @@ export type ProductEntry = Omit<
 >;
 
 export type ProductOutput = Omit<Product, "createdAt" | "editedAt">;
+
+export interface ProductCount {
+  "Number of Products": number;
+}

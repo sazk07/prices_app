@@ -9,3 +9,7 @@ export interface Shop {
 export type ShopEntry = Omit<Shop, "shopId" | "createdAt" | "editedAt">;
 
 export type ShopOutput = Omit<Shop, "createdAt" | "editedAt">;
+
+export interface ShopCount {
+  "Number of Shops": number;
+};

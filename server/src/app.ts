@@ -5,6 +5,7 @@ import purchaseRouter from "./purchase/routes/purchase.routes.js";
 import notFoundRouter from "./utils/notFound.routes.js";
 import { logError, errorHandler } from "./utils/errorHandler.js";
 import connectToDatabase from "@configs/database.js";
+import homePageRouter from "./home/routers/home.routes.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(
   }),
 );
 
+app.use(homePageRouter);
 app.use(shopRouter);
 app.use(productRouter);
 app.use(purchaseRouter);

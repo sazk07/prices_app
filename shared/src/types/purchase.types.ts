@@ -19,3 +19,7 @@ export type PurchaseEntry = Omit<
 >;
 
 export type PurchaseOutput = Omit<Purchase, "createdAt" | "editedAt">;
+
+export interface PurchaseCount {
+  "Number of Purchases": number;
+}
