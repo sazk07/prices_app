@@ -27,6 +27,27 @@ const main = async () => {
   const title =
     document.querySelector("#title") ?? document.createElement("h1#title");
   title.textContent = homePageData.title;
+  let shopCount = document.querySelector("#shop-count");
+  if (!shopCount) {
+    shopCount = document.createElement("li#shop-count");
+    shopCount.textContent = homePageData.countOfShops?.toString() ?? "";
+    document.querySelector("#shop-list")?.appendChild(shopCount);
+  }
+  shopCount.textContent = homePageData.countOfShops?.toString() ?? "";
+  let productCount = document.querySelector("#product-count");
+  if (!productCount) {
+    productCount = document.createElement("li#product-count");
+    productCount.textContent = homePageData.countOfProducts?.toString() ?? "";
+    document.querySelector("#product-list")?.appendChild(productCount);
+  }
+  productCount.textContent = homePageData.countOfProducts?.toString() ?? "";
+  let purchaseCount = document.querySelector("#purchase-count");
+  if (!purchaseCount) {
+    purchaseCount = document.createElement("li#purchase-count");
+    purchaseCount.textContent = homePageData.countOfPurchases?.toString() ?? "";
+    document.querySelector("#purchase-count")?.appendChild(purchaseCount);
+  }
+  purchaseCount.textContent = homePageData.countOfPurchases?.toString() ?? "";
 };
 
 main();
