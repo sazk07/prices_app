@@ -10,9 +10,10 @@ title.textContent = homePageData.title;
 const nav = createNav();
 document.querySelector("#title")?.insertAdjacentElement("afterend", nav);
 const homePageDataKeys = Object.keys(homePageData);
-let idx = homePageDataKeys.length;
+const homePageDataKeysLen = homePageDataKeys.length;
+let idx = homePageDataKeysLen;
 while (idx > 0) {
-  const k = homePageDataKeys[homePageDataKeys.length - idx];
+  const k = homePageDataKeys[homePageDataKeysLen - idx];
   const li = document.createElement("li");
   switch (k) {
     case "countOfShops":
