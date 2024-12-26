@@ -1,6 +1,6 @@
-import "../../css/style.css";
-import { fetchData } from "../utils/fetchData";
-import { createNav } from "../utils/nav";
+import "@/css/style.css";
+import { fetchData } from "@/scripts/utils/fetchData";
+import { createNav } from "@/scripts/utils/nav";
 import { ShopOutput } from "@dataTypes/shop.types";
 
 const nav = createNav();
@@ -24,5 +24,5 @@ while (idx > 0) {
   p.appendChild(span);
   li.appendChild(p);
   document.querySelector("ul")?.appendChild(li);
-  idx--;
+  --idx;
 }

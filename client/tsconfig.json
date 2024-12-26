@@ -10,17 +10,18 @@
       "@dataTypes/*": [
         "../shared/src/types/*"
       ],
-      "@public/*": [
-        "./src/public/*"
+      "@/*": [
+        "./src/*"
       ]
     },
-    "module": "ESNext",
+    "module": "preserve",
     "lib": [
       "es2023",
       "DOM",
       "DOM.Iterable"
     ],
     "moduleResolution": "bundler",
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true
   },

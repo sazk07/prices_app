@@ -1,10 +1,14 @@
-import "../css/style.css";
+import "@/css/style.css";
 import { HomeResponse } from "@dataTypes/home.types";
-import { createNav } from "./utils/nav";
-import { fetchData } from "./utils/fetchData";
+import { fetchData } from "@/scripts/utils/fetchData";
+import { createNav } from "@/scripts/utils/nav";
 
 const homePageData: HomeResponse = await fetchData("http://localhost:3000/");
-const title = document.querySelector("#title") ?? document.createElement("h1");
+let title = document.querySelector("#title")
+if (!title) {
+  title = document.createElement("h1")
+  title.setAttribute("id", "title")
+}
 title.textContent = homePageData.title;
 // append nav elem
 const nav = createNav();
@@ -30,5 +34,5 @@ while (idx > 0) {
   }
   // if li is not empty, append to #record-counts
   li.textContent && document.querySelector("#record-counts")?.appendChild(li);
-  idx--;
+  --idx;
 }
