@@ -22,7 +22,9 @@ form?.addEventListener("submit", async (e) => {
       alert("Failed to add shop. Please try again.");
       return;
     }
-    window.location.href = "http://localhost:5173";
+    const respData = await response.json();
+    const message = document.querySelector("#message") as HTMLDivElement;
+    message.textContent = respData.message;
   } catch (err) {
     console.error("Network Error:", err);
     alert("A network error occurred. Please try again");

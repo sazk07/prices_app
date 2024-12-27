@@ -4,7 +4,7 @@ import { createNav } from "@/scripts/utils/nav";
 import { ShopOutput } from "@dataTypes/shop.types";
 
 const nav = createNav();
-document.querySelector("h1")?.insertAdjacentElement("afterend", nav);
+document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 const shopListData: ShopOutput[] = await fetchData(
   "http://localhost:3000/shops",
 );
