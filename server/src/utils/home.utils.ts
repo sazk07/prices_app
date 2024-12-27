@@ -6,7 +6,7 @@ import { DatabaseSync } from "node:sqlite";
 export const getCountOfShops = async (db: DatabaseSync) => {
   const stmt = db.prepare(
     `
-    SELECT COUNT(DISTINCT shopId) AS [Number of Shops] FROM Purchase
+    SELECT COUNT(DISTINCT shopId) AS [Number of Shops] FROM Shop
   `,
   );
   const result = await Promise.resolve(stmt.get());
@@ -17,7 +17,7 @@ export const getCountOfShops = async (db: DatabaseSync) => {
 export const getCountOfProducts = async (db: DatabaseSync) => {
   const stmt = db.prepare(
     `
-    SELECT COUNT(DISTINCT productId) AS [Number of Products] FROM Purchase
+    SELECT COUNT(DISTINCT productId) AS [Number of Products] FROM Product
   `,
   );
   const result = await Promise.resolve(stmt.get());

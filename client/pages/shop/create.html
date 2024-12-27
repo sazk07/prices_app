@@ -9,7 +9,20 @@
 </head>
 
 <body>
-  <h1>Hello from Create New Shop</h1>
+  <h1>Create New Shop</h1>
+  <form action="http://localhost:3000/shop/create" method="POST">
+    <section class="form">
+      <label for="shopName">Shop Name: </label>
+      <input type="text" name="shopName" id="shopName">
+    </section>
+    <section class="form">
+      <label for="shopLocation">Shop Location: </label>
+      <input type="text" name="shopLocation" id="shopLocation">
+    </section>
+    <section class="form">
+      <button type="submit">Add Shop</button>
+    </section>
+  </form>
 </body>
 
 </html>
