@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Shop</title>
+  <script src="../../src/scripts/shop/update.ts" type="module"></script>
+</head>
+
+<body>
+  <form>
+    <section class="form">
+      <label for="shopName">Shop Name: </label>
+      <input type="text" name="shopName" id="shopName" required autofocus minlength="1">
+    </section>
+    <section class="form">
+      <label for="shopLocation">Shop Location: </label>
+      <input type="text" name="shopLocation" id="shopLocation" required minlength="1">
+    </section>
+    <section class="form">
+      <button type="submit">Update Shop</button>
+    </section>
+  </form>
+  <div id="message"></div>
+  <a href="/">Return to Home Page</a>
+</body>
+
+</html>

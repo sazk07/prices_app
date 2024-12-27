@@ -16,7 +16,11 @@ const title =
 title.textContent = `${shopData.shopName} - Expense Tracker`;
 const id = document.querySelector("#shopId") as HTMLHeadingElement;
 id.textContent = `ID: ${shopData.shopId}`;
-const name = document.querySelector("p") as HTMLParagraphElement;
+const name = document.querySelector("#shopName") as HTMLParagraphElement;
 name.textContent = `Shop Name: ${shopData.shopName}`;
 const location = document.querySelector("#location") as HTMLParagraphElement;
 location.textContent = `Location: ${shopData.shopLocation}`;
+const updateAnchor = document.createElement("a");
+updateAnchor.href = `../../../pages/shop/update.html?shopId=${shopData.shopId}`;
+updateAnchor.textContent = "Update Shop";
+document.querySelector("#location")?.insertAdjacentElement("afterend", updateAnchor);

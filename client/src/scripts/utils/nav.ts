@@ -1,4 +1,4 @@
-import "../../css/style.css";
+import "@/css/style.css";
 
 // create a function that creates a nav element
 export const createNav = () => {
@@ -36,20 +36,20 @@ export const createNav = () => {
   // create a li element for each link
   const linksLength = links.length;
   const halfway = Math.floor(linksLength / 2);
-  let idx = 0;
-  while (idx < linksLength) {
-    const link = links[idx] as { href: string; text: string };
+  let idx = linksLength;
+  while (idx > 0) {
+    const link = links[linksLength - idx] as { href: string; text: string };
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = link?.href;
     a.textContent = link?.text;
     li.appendChild(a);
     ul.appendChild(li);
-    if (idx === halfway - 1) {
+    if (idx === halfway + 1) {
       const hr = document.createElement("hr");
       ul.appendChild(hr);
     }
-    idx++;
+    --idx;
   }
 
   // add the ul element to the nav element
