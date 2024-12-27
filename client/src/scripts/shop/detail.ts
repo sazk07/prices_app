@@ -14,23 +14,9 @@ const shopData: ShopOutput = await fetchData(
 const title =
   document.querySelector("title") ?? document.createElement("title");
 title.textContent = `${shopData.shopName} - Expense Tracker`;
-let id = document.querySelector("#shopId");
-if (!id) {
-  id = document.createElement("h1");
-  id.setAttribute("id", "shopId");
-  document.querySelector("body")?.insertAdjacentElement("afterbegin", id);
-}
+const id = document.querySelector("#shopId") as HTMLHeadingElement;
 id.textContent = `ID: ${shopData.shopId}`;
-let name = document.querySelector("p")
-if (!name) {
-  name = document.createElement("p");
-  document.querySelector("#shopId")?.insertAdjacentElement("afterend", name);
-}
+const name = document.querySelector("p") as HTMLParagraphElement;
 name.textContent = `Shop Name: ${shopData.shopName}`;
-let location = document.querySelector("#location");
-if (!location) {
-  location = document.createElement("p");
-  location.setAttribute("id", "location");
-  name.insertAdjacentElement("afterend", location);
-}
+const location = document.querySelector("#location") as HTMLParagraphElement;
 location.textContent = `Location: ${shopData.shopLocation}`;
