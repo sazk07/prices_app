@@ -3,10 +3,6 @@ import { ShopOutput } from "@dataTypes/shop.types";
 import { fetchData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 
-// on load from detail page, the input fields should already be populated with the values from the detail page
-// the user will edit the values and submit the form to update the shop.
-// on submit, the form will send a PUT request to http://localhost:3000/shop/update URL
-
 const nav = createNav();
 document.querySelector("body")?.insertAdjacentElement("afterbegin", nav);
 const shopId = new URLSearchParams(window.location.search).get("shopId");
