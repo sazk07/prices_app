@@ -10,7 +10,6 @@ const shopId = new URLSearchParams(window.location.search).get("shopId");
 const shopData: ShopOutput = await getData(
   `http://localhost:3000/shop/${shopId}`,
 );
-// insert shopName into title and h1
 const title =
   document.querySelector("title") ?? document.createElement("title");
 title.textContent = `${shopData.shopName} - Expense Tracker`;
@@ -21,6 +20,6 @@ name.textContent = `Shop Name: ${shopData.shopName}`;
 const location = document.querySelector("#location") as HTMLParagraphElement;
 location.textContent = `Location: ${shopData.shopLocation}`;
 const updateAnchor = document.createElement("a");
-updateAnchor.href = `../../../pages/shop/update.html?shopId=${shopData.shopId}`;
+updateAnchor.href = `../../../shop/update.html?shopId=${shopData.shopId}`;
 updateAnchor.textContent = "Update Shop";
 document.querySelector("#location")?.insertAdjacentElement("afterend", updateAnchor);

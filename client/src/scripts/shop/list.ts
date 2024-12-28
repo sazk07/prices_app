@@ -14,7 +14,7 @@ while (idx > 0) {
   const shop = shopListData[shopListDataLen - idx] as ShopOutput;
   const li = document.createElement("li");
   const a = document.createElement("a");
-  a.href = `../../../pages/shop/detail.html?shopId=${shop.shopId}`;
+  a.href = `../../../shop/detail.html?shopId=${shop.shopId}`;
   a.textContent = shop.shopName;
   const p = document.createElement("p");
   // insert anchor and shop.shopLocation to p
