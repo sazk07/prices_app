@@ -5,24 +5,26 @@ import { ShopOutput } from "@dataTypes/shop.types";
 
 const nav = createNav();
 document.querySelector("a")?.insertAdjacentElement("afterend", nav);
-const shopListData: ShopOutput[] = await getData(
-  "http://localhost:3000/shops",
-);
+
+const ul = document.createElement("ul");
+ul.setAttribute("id", "shopList");
+document.querySelector("nav")?.insertAdjacentElement("afterend", ul);
+
+const shopListData: ShopOutput[] = await getData("http://localhost:3000/shops");
 const shopListDataLen = shopListData.length;
 let idx = shopListDataLen;
 while (idx > 0) {
   const shop = shopListData[shopListDataLen - idx] as ShopOutput;
-  const li = document.createElement("li");
   const a = document.createElement("a");
   a.href = `../../../shop/detail.html?shopId=${shop.shopId}`;
   a.textContent = shop.shopName;
-  const p = document.createElement("p");
-  // insert anchor and shop.shopLocation to p
-  p.appendChild(a);
   const span = document.createElement("span");
   span.textContent = `, ${shop.shopLocation}`;
+  const p = document.createElement("p");
+  p.appendChild(a);
   p.appendChild(span);
+  const li = document.createElement("li");
   li.appendChild(p);
-  document.querySelector("ul")?.appendChild(li);
+  document.querySelector("#shopList")?.appendChild(li);
   --idx;
 }
