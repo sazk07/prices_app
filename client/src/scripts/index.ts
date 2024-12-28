@@ -1,9 +1,9 @@
 import "@/css/style.css";
 import { HomeResponse } from "@dataTypes/home.types";
-import { fetchData } from "@/scripts/utils/fetchData";
+import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
 
-const homePageData: HomeResponse = await fetchData("http://localhost:3000/");
+const homePageData: HomeResponse = await getData("http://localhost:3000/");
 let title = document.querySelector("#title")
 if (!title) {
   title = document.createElement("h1")

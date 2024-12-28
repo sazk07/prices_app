@@ -1,4 +1,4 @@
-export const fetchData = async (url: string) => {
+export const getData = async (url: string) => {
   try {
     const dataPromise = await fetch(url, {
       credentials: "include",
@@ -8,13 +8,13 @@ export const fetchData = async (url: string) => {
     }
     const data = await dataPromise.json();
     if (!data) {
-      throw new Error("No data found for main page");
+      throw new Error("No data found");
     }
     return data;
   } catch (err) {
     console.error(err);
     return {
-      title: "Unable to fetch Home Page",
+      title: "Network Error. Please try again.",
     };
   }
 };

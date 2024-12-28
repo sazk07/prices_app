@@ -1,11 +1,11 @@
 import "@/css/style.css";
-import { fetchData } from "@/scripts/utils/fetchData";
+import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
 import { ShopOutput } from "@dataTypes/shop.types";
 
 const nav = createNav();
 document.querySelector("a")?.insertAdjacentElement("afterend", nav);
-const shopListData: ShopOutput[] = await fetchData(
+const shopListData: ShopOutput[] = await getData(
   "http://localhost:3000/shops",
 );
 const shopListDataLen = shopListData.length;

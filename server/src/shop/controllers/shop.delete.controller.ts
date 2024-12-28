@@ -21,7 +21,6 @@ export const deleteShop = async (
       const validationError = new GoneError("Shop already deleted");
       next(validationError);
     }
-    // TODO: redirect to /shops on delete ?
     res.status(204).end();
   } catch (err) {
     console.error(err);

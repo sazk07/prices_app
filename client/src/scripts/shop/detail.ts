@@ -1,13 +1,13 @@
 import { ShopOutput } from "@dataTypes/shop.types";
 import "@/css/style.css";
-import { fetchData } from "@/scripts/utils/fetchData";
+import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
 
 const nav = createNav();
 document.querySelector("body")?.insertAdjacentElement("afterbegin", nav);
 // get shopId from query param in browser url
 const shopId = new URLSearchParams(window.location.search).get("shopId");
-const shopData: ShopOutput = await fetchData(
+const shopData: ShopOutput = await getData(
   `http://localhost:3000/shop/${shopId}`,
 );
 // insert shopName into title and h1

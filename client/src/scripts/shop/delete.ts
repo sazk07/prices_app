@@ -15,7 +15,7 @@ deleteBtn.addEventListener("click", async () => {
       return;
     }
     alert("Shop deleted successfully");
-    window.location.href = "../../../pages/shop/list.html";
+    window.location.href = "../../../shops.html";
   } catch (err) {
     console.error("Network Error:", err);
     alert("A network error occurred. Please try again");

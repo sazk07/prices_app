@@ -4,25 +4,25 @@ import "@/css/style.css";
 export const createNav = () => {
   // create a list of links
   const links = [
-    { href: "http://localhost:5173/pages/shop/list.html", text: "All Shops" },
+    { href: "../../../shops.html", text: "All Shops" },
     {
-      href: "http://localhost:5173/pages/product/list.html",
+      href: "../../../products.html",
       text: "All Products",
     },
     {
-      href: "http://localhost:5173/pages/purchase/list.html",
+      href: "../../../purchases.html",
       text: "All Purchases",
     },
     {
-      href: "http://localhost:5173/pages/shop/create.html",
+      href: "../../../shop/create.html",
       text: "Create New Shop",
     },
     {
-      href: "http://localhost:5173/pages/product/create.html",
+      href: "../../../product/create.html",
       text: "Create New Product",
     },
     {
-      href: "http://localhost:5173/pages/purchase/create.html",
+      href: "../../../purchase/create.html",
       text: "Create New Purchase",
     },
   ];
