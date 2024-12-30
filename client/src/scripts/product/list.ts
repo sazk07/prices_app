@@ -6,6 +6,7 @@ import { ProductOutput } from "@dataTypes/product.types";
 import {
   createTableBody,
   createTableHeaders,
+  secondcreateTableBody,
   sortData,
 } from "../utils/tableUtils";
 
@@ -28,7 +29,16 @@ const tbody = document.querySelector("tbody") as HTMLTableSectionElement;
 tbody.setAttribute("id", "productList");
 
 const tbodyId = tbody.getAttribute("id") ?? "";
-createTableBody<ProductOutput>(tbodyId, productKeysArr, productList);
+secondcreateTableBody(
+  productList,
+  tbody,
+  ["productName", "productBrand", "productCategory"],
+  {
+    key: "productName",
+    baseUrl: "../../product/detail.html?productId=",
+    linkKey: "productId",
+  },
+);
 
 const headers = document.querySelectorAll("th");
 let currSortCol: keyof ProductOutput | null = null;

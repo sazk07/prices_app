@@ -77,6 +77,33 @@ export const createTableBody = <T>(id: string, keys: string[], data: T[]) => {
   }
 };
 
+export const secondcreateTableBody = <T>(
+  data: T[],
+  tableBody: HTMLTableSectionElement,
+  columns: (keyof T)[],
+  linkColumn?: { key: keyof T; baseUrl: string; linkKey: keyof T },
+) => {
+  tableBody.textContent = "";
+  data.forEach((elem) => {
+    const tr = document.createElement("tr");
+    columns.forEach((column) => {
+      const td = document.createElement("td");
+      if (linkColumn && column === linkColumn.key) {
+        const link = document.createElement("a");
+        link.href = `${linkColumn.baseUrl}${elem[linkColumn.linkKey]}`;
+        link.textContent = String(elem[column]);
+        td.appendChild(link);
+      } else {
+        td.textContent = String(elem[column]);
+      }
+
+      tr.appendChild(td);
+    });
+
+    tableBody.appendChild(tr);
+  });
+};
+
 export const sortData = <T>(
   data: T[],
   col: keyof T,
