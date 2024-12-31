@@ -9,7 +9,6 @@ import {
   sortData,
   filterKeys,
 } from "../utils/tableUtils";
-import { Sort } from "@dataTypes/generics.types";
 
 const nav = createNav();
 document.querySelector("a")?.insertAdjacentElement("afterend", nav);
@@ -42,11 +41,8 @@ createTableBody(
 
 // SORT BY MOUSE CLICK
 const headers = document.querySelectorAll("th");
-const currSortState = {
-  column: null,
-  direction: "asc",
-} as Sort<ProductOutput>;
-let { column, direction } = currSortState;
+let column: keyof ProductOutput | null = null;
+let direction: "asc" | "desc" = "asc";
 headers.forEach((header) => {
   header.addEventListener("click", () => {
     const col = header.getAttribute("data-column") as keyof ProductOutput;
