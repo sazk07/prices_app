@@ -63,3 +63,26 @@ export const sortData = <T>(
   });
   return sortedData;
 };
+
+export const sortHeaders = <T>(
+  header: HTMLTableCellElement,
+  headers: NodeListOf<HTMLTableCellElement>,
+  column: keyof T | null,
+  direction: "asc" | "desc",
+  dataList: T[],
+  tableBody: HTMLTableSectionElement,
+  columns: (keyof T)[],
+  linkColumn: Column<T>,
+) => {
+  const col = header.getAttribute("data-column") as keyof T;
+  console.log(col)
+  const isSameCol = col === column;
+  direction = isSameCol && direction === "asc" ? "desc" : "asc";
+  column = col;
+  const sortedData = sortData(dataList, col, direction);
+  headers.forEach((h) => {
+    h.classList.remove("sort-asc", "sort-desc");
+  });
+  header.classList.add(direction === "asc" ? "sort-asc" : "sort-desc");
+  createTableBody(sortedData, tableBody, columns, linkColumn);
+};

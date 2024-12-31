@@ -13,8 +13,8 @@ export const createProduct = async (
       `
       INSERT INTO Product (
         productName,
-        productCategory,
-        productBrand)
+        productBrand,
+        productCategory)
       VALUES (
         ?,
         ?,
@@ -22,7 +22,7 @@ export const createProduct = async (
     `,
     );
     const result = await Promise.resolve(
-      stmt.run(productName, productCategory, productBrand),
+      stmt.run(productName, productBrand, productCategory),
     );
     const productId = result.lastInsertRowid as number;
     res.statusCode = 201;

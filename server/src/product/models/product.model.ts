@@ -9,11 +9,11 @@ export const ProductModel = async () => {
       CREATE TABLE IF NOT EXISTS Product (
         productId INTEGER PRIMARY KEY AUTOINCREMENT,
         productName TEXT NOT NULL,
-        productCategory TEXT NOT NULL,
         productBrand TEXT NOT NULL,
+        productCategory TEXT NOT NULL,
         createdAt INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
         editedAt INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-        UNIQUE (productName, productCategory, productBrand));
+        UNIQUE (productName, productBrand, productCategory));
     `,
     ).run();
     db.prepare(

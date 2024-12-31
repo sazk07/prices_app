@@ -10,17 +10,17 @@ const productSchema = z.object({
     })
     .min(1, { message: "Product Name is required" })
     .trim(),
-  productCategory: z
-    .string({
-      invalid_type_error: "Product Category must be a string",
-    })
-    .min(1, { message: "Product Category is required" })
-    .trim(),
   productBrand: z
     .string({
       invalid_type_error: "Product Brand must be a string",
     })
     .min(1, { message: "Product Brand is required" })
+    .trim(),
+  productCategory: z
+    .string({
+      invalid_type_error: "Product Category must be a string",
+    })
+    .min(1, { message: "Product Category is required" })
     .trim(),
 });
 

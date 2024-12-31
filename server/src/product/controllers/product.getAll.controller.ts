@@ -15,8 +15,8 @@ export const getAllProducts = async (
       SELECT
         productId,
         productName,
-        productCategory,
-        productBrand
+        productBrand,
+        productCategory
       FROM Product
     `,
     );

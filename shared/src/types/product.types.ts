@@ -1,8 +1,8 @@
 export interface Product {
   productId: number;
   productName: string;
-  productCategory: string;
   productBrand: string;
+  productCategory: string;
   createdAt: number;
   editedAt: number;
 }

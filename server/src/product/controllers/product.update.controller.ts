@@ -20,8 +20,8 @@ export const updateProduct = async (
       UPDATE Product
       SET
         productName = ?,
-        productCategory = ?,
         productBrand = ?,
+        productCategory = ?,
         editedAt = ?
       WHERE
         productId = ?
@@ -30,8 +30,8 @@ export const updateProduct = async (
     const result = await Promise.resolve(
       stmt.run(
         productName,
-        productCategory,
         productBrand,
+        productCategory,
         Date.now(),
         idNumber,
       ),
