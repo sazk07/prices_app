@@ -8,7 +8,6 @@ import {
   createTableBody,
   sortData,
   filterKeys,
-  sortHeaders,
 } from "../utils/tableUtils";
 
 const nav = createNav();
@@ -44,42 +43,27 @@ createTableBody(
 const headers = document.querySelectorAll("th");
 let column: keyof ProductOutput | null = null;
 let direction: "asc" | "desc" = "asc";
-// const sortHeaders = (header: HTMLTableCellElement) => {
-//   const col = header.getAttribute("data-column") as keyof ProductOutput;
-//   const isSameCol = col === column;
-//   direction = isSameCol && direction === "asc" ? "desc" : "asc";
-//   column = col;
-//   const sortedData = sortData(productList, col, direction);
-//   headers.forEach((h) => {
-//     h.classList.remove("sort-asc", "sort-desc");
-//   });
-//   header.classList.add(direction === "asc" ? "sort-asc" : "sort-desc");
-//   createTableBody(
-//     sortedData,
-//     tbody,
-//     ["productName", "productBrand", "productCategory"],
-//     {
-//       name: "productName",
-//       baseUrl: "../../product/detail.html?productId=",
-//       id: "productId",
-//     },
-//   );
-// };
-headers.forEach((header) => {
-  header.addEventListener("click", () =>
-    sortHeaders(
-      header,
-      headers,
-      column,
-      direction,
-      productList,
-      tbody,
-      ["productName", "productBrand", "productCategory"],
-      {
-        name: "productName",
-        baseUrl: "../../product/detail.html?productId=",
-        id: "productId",
-      },
-    ),
+const sortHeaders = (header: HTMLTableCellElement) => {
+  const col = header.getAttribute("data-column") as keyof ProductOutput;
+  const isSameCol = col === column;
+  direction = isSameCol && direction === "asc" ? "desc" : "asc";
+  column = col;
+  const sortedData = sortData(productList, col, direction);
+  headers.forEach((h) => {
+    h.removeAttribute("class");
+  });
+  header.setAttribute("class", direction === "asc" ? "sort-asc" : "sort-desc");
+  createTableBody(
+    sortedData,
+    tbody,
+    ["productName", "productBrand", "productCategory"],
+    {
+      name: "productName",
+      baseUrl: "../../product/detail.html?productId=",
+      id: "productId",
+    },
   );
+};
+headers.forEach((header) => {
+  header.addEventListener("click", () => sortHeaders(header));
 });
