@@ -1,30 +1,55 @@
 import "@/css/style.css";
+import "@/css/tableStyle.css";
 import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
 import { ShopOutput } from "@dataTypes/shop.types";
+import { Column, SortState } from "@dataTypes/generics.types";
+import { getKeys } from "../utils/getkeys";
+import {
+  createTableBody,
+  createTableHeaders,
+  sortTable,
+} from "../utils/tableUtils";
 
+const LINK_COLUMN: Column<ShopOutput> = {
+  name: "shopName",
+  baseUrl: "../../shop/detail.html?shopId=",
+  id: "shopId",
+};
+const shopList: ShopOutput[] = await getData("http://localhost:3000/shops");
+const shopKeys = getKeys(shopList);
+
+// NAV
 const nav = createNav();
 document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 
-const ul = document.createElement("ul");
-ul.setAttribute("id", "shopList");
-document.querySelector("nav")?.insertAdjacentElement("afterend", ul);
+// TABLE HEADERS
+const tr = document.querySelector("tr") as HTMLTableRowElement;
+const headerNames = ["Shop Name", "Shop Location"];
+const thList = createTableHeaders(shopKeys, headerNames);
+tr.append(...thList);
 
-const shopListData: ShopOutput[] = await getData("http://localhost:3000/shops");
-const shopListDataLen = shopListData.length;
-let idx = shopListDataLen;
-while (idx > 0) {
-  const shop = shopListData[shopListDataLen - idx] as ShopOutput;
-  const a = document.createElement("a");
-  a.href = `../../../shop/detail.html?shopId=${shop.shopId}`;
-  a.textContent = shop.shopName;
-  const span = document.createElement("span");
-  span.textContent = `, ${shop.shopLocation}`;
-  const p = document.createElement("p");
-  p.appendChild(a);
-  p.appendChild(span);
-  const li = document.createElement("li");
-  li.appendChild(p);
-  document.querySelector("#shopList")?.appendChild(li);
-  --idx;
-}
+// TABLE BODY
+const tbody = document.querySelector("tbody") as HTMLTableSectionElement;
+tbody.setAttribute("id", "productList");
+createTableBody(shopList, tbody, shopKeys, LINK_COLUMN);
+
+// SORT BY MOUSE CLICK
+const headers = document.querySelectorAll("th");
+const currSortState: SortState<ShopOutput> = {
+  column: null,
+  direction: "asc",
+};
+const handleSortTable = (header: HTMLTableCellElement) =>
+  sortTable(
+    shopList,
+    tbody,
+    shopKeys,
+    LINK_COLUMN,
+    header,
+    headers,
+    currSortState,
+  );
+headers.forEach((header) => {
+  header.addEventListener("click", () => handleSortTable(header));
+});
