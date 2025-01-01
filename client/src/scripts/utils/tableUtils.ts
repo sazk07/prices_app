@@ -1,18 +1,9 @@
-import "@/css/headerStyle.css";
-import { Column } from "@dataTypes/generics.types";
+import { Column, SortState } from "@dataTypes/generics.types";
 
-const NOT_ALLOWED = ["shopId", "productId", "purchaseId"];
-export const filterKeys = (keysArr: string[]) => {
-  return keysArr.filter((key) => !NOT_ALLOWED.includes(key));
-};
-
-export const createTableHeaders = (
-  keysList: string[],
-  headerNames: string[],
-) => {
+export const createTableHeaders = <T>(keysList: T[], headerNames: string[]) => {
   const thList = keysList.map((key, idx) => {
     const header = document.createElement("th");
-    header.setAttribute("data-column", key);
+    header.setAttribute("data-column", key as string);
     header.textContent = headerNames[idx] ?? "";
     return header;
   });
@@ -45,7 +36,7 @@ export const createTableBody = <T>(
   });
 };
 
-export const sortData = <T>(
+const sortData = <T>(
   dataList: T[],
   col: keyof T,
   direction: "asc" | "desc",
@@ -62,4 +53,27 @@ export const sortData = <T>(
     return 0;
   });
   return sortedData;
+};
+
+export const sortTable = <T>(
+  dataList: T[],
+  tableBody: HTMLTableSectionElement,
+  columns: (keyof T)[],
+  linkColumn: Column<T>,
+  header: HTMLTableCellElement,
+  headers: NodeListOf<HTMLTableCellElement>,
+  currSortState: SortState<T>,
+) => {
+  const col = header.getAttribute("data-column") as keyof T;
+  const isSameCol = col === currSortState.column;
+  currSortState.direction =
+    isSameCol && currSortState.direction === "asc" ? "desc" : "asc";
+  currSortState.column = col;
+  const sortedData = sortData(dataList, col, currSortState.direction);
+  headers.forEach((h) => h.removeAttribute("class"));
+  header.setAttribute(
+    "class",
+    currSortState.direction === "asc" ? "sort-asc" : "sort-desc",
+  );
+  createTableBody(sortedData, tableBody, columns, linkColumn);
 };

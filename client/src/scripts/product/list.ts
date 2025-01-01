@@ -1,69 +1,57 @@
 import "@/css/style.css";
-import "@/css/headerStyle.css";
+import "@/css/tableStyle.css";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 import { ProductOutput } from "@dataTypes/product.types";
 import {
   createTableHeaders,
   createTableBody,
-  sortData,
-  filterKeys,
+  sortTable as sortTable,
 } from "../utils/tableUtils";
+import { Column, SortState } from "@dataTypes/generics.types";
+import { getKeys } from "../utils/getkeys";
 
-const nav = createNav();
-document.querySelector("a")?.insertAdjacentElement("afterend", nav);
-
+const LINK_COLUMN: Column<ProductOutput> = {
+  name: "productName",
+  baseUrl: "../../product/detail.html?productId=",
+  id: "productId",
+};
 const productList: ProductOutput[] = await getData(
   "http://localhost:3000/products",
 );
+const productKeys = getKeys(productList);
+
+// NAV
+const nav = createNav();
+document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 
 // TABLE HEADERS
 const tr = document.querySelector("tr") as HTMLTableRowElement;
-const productKeys = productList[0] ? Object.keys(productList[0]) : [];
-const requiredKeys = filterKeys(productKeys);
 const headerNames = ["Product Name", "Product Brand", "Product Category"];
-const thList = createTableHeaders(requiredKeys, headerNames);
+const thList = createTableHeaders(productKeys, headerNames);
 tr.append(...thList);
 
 // TABLE BODY
 const tbody = document.querySelector("tbody") as HTMLTableSectionElement;
 tbody.setAttribute("id", "productList");
-createTableBody(
-  productList,
-  tbody,
-  ["productName", "productBrand", "productCategory"],
-  {
-    name: "productName",
-    baseUrl: "../../product/detail.html?productId=",
-    id: "productId",
-  },
-);
+createTableBody(productList, tbody, productKeys, LINK_COLUMN);
 
 // SORT BY MOUSE CLICK
 const headers = document.querySelectorAll("th");
-let column: keyof ProductOutput | null = null;
-let direction: "asc" | "desc" = "asc";
-const sortHeaders = (header: HTMLTableCellElement) => {
-  const col = header.getAttribute("data-column") as keyof ProductOutput;
-  const isSameCol = col === column;
-  direction = isSameCol && direction === "asc" ? "desc" : "asc";
-  column = col;
-  const sortedData = sortData(productList, col, direction);
-  headers.forEach((h) => {
-    h.removeAttribute("class");
-  });
-  header.setAttribute("class", direction === "asc" ? "sort-asc" : "sort-desc");
-  createTableBody(
-    sortedData,
-    tbody,
-    ["productName", "productBrand", "productCategory"],
-    {
-      name: "productName",
-      baseUrl: "../../product/detail.html?productId=",
-      id: "productId",
-    },
-  );
+const currSortState: SortState<ProductOutput> = {
+  column: null,
+  direction: "asc",
 };
+const handleSortTable = (header: HTMLTableCellElement) =>
+  sortTable(
+    productList,
+    tbody,
+    productKeys,
+    LINK_COLUMN,
+    header,
+    headers,
+    currSortState,
+  );
 headers.forEach((header) => {
-  header.addEventListener("click", () => sortHeaders(header));
+  header.addEventListener("click", () => handleSortTable(header));
 });
