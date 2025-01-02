@@ -1,7 +1,7 @@
 import "@/css/style.css";
 import "@/css/tableStyle.css";
 import { Column, SortState } from "@dataTypes/generics.types";
-import { PurchaseOutput } from "@dataTypes/purchase.types";
+import { PurchaseOutput, PurchaseView } from "@dataTypes/purchase.types";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 import {
@@ -9,18 +9,17 @@ import {
   createTableHeaders,
   sortTable,
 } from "../utils/tableUtils";
+import { getKeys } from "../utils/getkeys";
 
-const LINK_COLUMN: Column<PurchaseOutput> = {
-  name: "productId",
+const LINK_COLUMN: Column<PurchaseView> = {
+  name: "productName",
   baseUrl: "../../purchase/detail.html?purchaseId=",
   id: "purchaseId",
 };
-const purchaseList: PurchaseOutput[] = await getData(
+const purchaseList: PurchaseView[] = await getData(
   "http://localhost:3000/purchases",
 );
-const purchaseKeys = purchaseList[0]
-  ? (Object.keys(purchaseList[0]) as Array<keyof PurchaseOutput>)
-  : [];
+const purchaseKeys = getKeys(purchaseList);
 
 // NAV
 const nav = createNav();
@@ -29,12 +28,12 @@ document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 // TABLE HEADERS
 const tr = document.querySelector("tr") as HTMLTableRowElement;
 const headerNames = [
-  "Date",
   "Product Name",
   "Product Brand",
   "Product Category",
   "Shop Name",
   "Location",
+  "Date",
   "Quantity",
   "Price",
   "Tax Rate",
@@ -43,7 +42,30 @@ const headerNames = [
   "Non-MRP Tax Amount",
 ];
 const thList = createTableHeaders(purchaseKeys, headerNames);
-tr.append(...thList);
+const desiredOrder = [
+  "purchaseDate",
+  "productName",
+  "productBrand",
+  "productCategory",
+  "shopName",
+  "shopLocation",
+  "quantity",
+  "price",
+  "taxRate",
+  "taxAmount",
+  "mrpTaxAmount",
+  "nonMrpTaxAmount",
+];
+const rearrangeCells = (cells: HTMLTableCellElement[], order: string[]) => {
+  const cellMap = new Map(
+    cells.map((cell) => [cell.getAttribute("data-column"), cell]),
+  );
+  return order.map(
+    (column) => cellMap.get(column.toString()) as HTMLTableCellElement,
+  );
+};
+const rearrangedCells = rearrangeCells(thList, desiredOrder);
+tr.append(...rearrangedCells);
 
 // TABLE BODY
 const tbody = document.querySelector("tbody") as HTMLTableSectionElement;

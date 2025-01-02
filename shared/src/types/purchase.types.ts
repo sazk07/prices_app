@@ -1,3 +1,6 @@
+import { Product } from "./product.types.js";
+import { Shop } from "./shop.types.js";
+
 export interface Purchase {
   purchaseId: number;
   shopId: number;
@@ -19,6 +22,8 @@ export type PurchaseEntry = Omit<
 >;
 
 export type PurchaseOutput = Omit<Purchase, "createdAt" | "editedAt">;
+
+export type PurchaseView = Omit<Purchase & Product & Shop, "createdAt" | "editedAt"> ;
 
 export interface PurchaseCount {
   "Number of Purchases": number;

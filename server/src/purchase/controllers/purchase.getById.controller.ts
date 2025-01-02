@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { ProductOutput } from "@dataTypes/product.types.js";
 import { PurchaseModel } from "@purchase/models/purchase.model.js";
+import { PurchaseOutput } from "@dataTypes/purchase.types.js";
 
 export const getPurchaseById = async (
   req: Request,
@@ -34,7 +34,7 @@ export const getPurchaseById = async (
     `,
     );
     const result = await Promise.resolve(stmt.get(idNumber));
-    const purchase = (result as ProductOutput) ?? null;
+    const purchase = (result as PurchaseOutput) ?? null;
     res.statusCode = 200;
     res.json(purchase);
   } catch (err) {
