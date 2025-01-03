@@ -6,7 +6,9 @@ import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 import {
   createTableBody,
-  createTableHeaders,
+  createTableHeadersList,
+  createTableWithId,
+  rearrangeKeys,
   sortTable,
 } from "../utils/tableUtils";
 import { getKeys } from "../utils/getkeys";
@@ -28,12 +30,12 @@ document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 // TABLE HEADERS
 const tr = document.querySelector("tr") as HTMLTableRowElement;
 const headerNames = [
+  "Date",
   "Product Name",
   "Product Brand",
   "Product Category",
   "Shop Name",
   "Location",
-  "Date",
   "Quantity",
   "Price",
   "Tax Rate",
@@ -41,7 +43,6 @@ const headerNames = [
   "MRP Tax Amount",
   "Non-MRP Tax Amount",
 ];
-const thList = createTableHeaders(purchaseKeys, headerNames);
 const desiredOrder = [
   "purchaseDate",
   "productName",
@@ -56,21 +57,16 @@ const desiredOrder = [
   "mrpTaxAmount",
   "nonMrpTaxAmount",
 ];
-const rearrangeCells = (cells: HTMLTableCellElement[], order: string[]) => {
-  const cellMap = new Map(
-    cells.map((cell) => [cell.getAttribute("data-column"), cell]),
-  );
-  return order.map(
-    (column) => cellMap.get(column.toString()) as HTMLTableCellElement,
-  );
-};
-const rearrangedCells = rearrangeCells(thList, desiredOrder);
-tr.append(...rearrangedCells);
+let rearrangedKeys = rearrangeKeys(purchaseKeys, desiredOrder);
+const thList = createTableHeadersList(rearrangedKeys, headerNames);
+tr.append(...thList);
 
 // TABLE BODY
-const tbody = document.querySelector("tbody") as HTMLTableSectionElement;
+const tbody =
+  document.querySelector("tbody") ?? createTableWithId("purchaseList");
 tbody.setAttribute("id", "purchaseList");
-// createTableBody(purchaseList, tbody, purchaseKeys, LINK_COLUMN);
+rearrangedKeys = rearrangeKeys(purchaseKeys, desiredOrder);
+createTableBody(purchaseList, tbody, rearrangedKeys, LINK_COLUMN);
 
 // SORT BY MOUSE CLICK
 const headers = document.querySelectorAll("th");
@@ -82,13 +78,12 @@ const handleSortTable = (header: HTMLTableCellElement) =>
   sortTable(
     purchaseList,
     tbody,
-    purchaseKeys,
+    rearrangedKeys,
     LINK_COLUMN,
     header,
     headers,
     currSortState,
   );
 headers.forEach((header) => {
-  // TODO
-  header.addEventListener("click", () => {});
+  header.addEventListener("click", () => handleSortTable(header));
 });

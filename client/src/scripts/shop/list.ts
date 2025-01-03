@@ -7,7 +7,7 @@ import { Column, SortState } from "@dataTypes/generics.types";
 import { getKeys } from "../utils/getkeys";
 import {
   createTableBody,
-  createTableHeaders,
+  createTableHeadersList,
   sortTable,
 } from "../utils/tableUtils";
 
@@ -26,7 +26,7 @@ document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 // TABLE HEADERS
 const tr = document.querySelector("tr") as HTMLTableRowElement;
 const headerNames = ["Shop Name", "Shop Location"];
-const thList = createTableHeaders(shopKeys, headerNames);
+const thList = createTableHeadersList(shopKeys, headerNames);
 tr.append(...thList);
 
 // TABLE BODY

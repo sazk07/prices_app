@@ -1,9 +1,13 @@
 import { Column, SortState } from "@dataTypes/generics.types";
 
-export const createTableHeaders = <T>(keysList: T[], headerNames: string[]) => {
+export const createTableHeadersList = <T>(
+  keysList: T[],
+  headerNames: string[],
+) => {
   const thList = keysList.map((key, idx) => {
     const header = document.createElement("th");
-    header.setAttribute("data-column", key as string);
+    const kStr = String(key);
+    header.setAttribute("data-column", kStr);
     header.textContent = headerNames[idx] ?? "";
     return header;
   });
@@ -22,6 +26,8 @@ export const createTableBody = <T>(
     const tr = document.createElement("tr");
     columns.forEach((column) => {
       const td = document.createElement("td");
+      const colStr = String(column);
+      td.setAttribute("data-column", colStr);
       if (linkColumn && column === name) {
         const link = document.createElement("a");
         link.href = `${baseUrl}${data[linkColumn.id]}`;
@@ -36,18 +42,29 @@ export const createTableBody = <T>(
   });
 };
 
+export const rearrangeKeys = <T>(keys: (keyof T)[], desiredOrder: string[]) => {
+  return desiredOrder
+    .map((elem) => keys.find((key) => key === elem))
+    .filter((key) => key !== undefined);
+};
+
 const sortData = <T>(
   dataList: T[],
   col: keyof T,
   direction: "asc" | "desc",
 ) => {
   const sortedData = [...dataList].sort((a, b) => {
-    const aVal = String(a[col]).toLowerCase() ?? "";
-    const bVal = String(b[col]).toLowerCase() ?? "";
-    if (aVal < bVal) {
+    const aVal = a[col];
+    const bVal = b[col];
+    if (typeof aVal === "number" && typeof bVal === "number") {
+      return direction === "asc" ? aVal - bVal : bVal - aVal;
+    }
+    const aStr = String(aVal).toLowerCase();
+    const bStr = String(bVal).toLowerCase();
+    if (aStr < bStr) {
       return direction === "asc" ? -1 : 1;
     }
-    if (aVal > bVal) {
+    if (aStr > bStr) {
       return direction === "asc" ? 1 : -1;
     }
     return 0;
@@ -76,4 +93,10 @@ export const sortTable = <T>(
     currSortState.direction === "asc" ? "sort-asc" : "sort-desc",
   );
   createTableBody(sortedData, tableBody, columns, linkColumn);
+};
+
+export const createTableWithId = (id: string) => {
+  const tbody = document.createElement("tbody");
+  tbody.setAttribute("id", id);
+  return tbody;
 };

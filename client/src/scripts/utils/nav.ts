@@ -38,7 +38,7 @@ export const createNav = () => {
   const halfway = Math.floor(linksLength / 2);
   let idx = linksLength;
   while (idx > 0) {
-    const link = links[linksLength - idx] as { href: string; text: string };
+    const link = links[linksLength - idx] ?? { href: "", text: "" };
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = link?.href;

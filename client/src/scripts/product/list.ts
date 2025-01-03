@@ -4,7 +4,7 @@ import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 import { ProductOutput } from "@dataTypes/product.types";
 import {
-  createTableHeaders,
+  createTableHeadersList,
   createTableBody,
   sortTable as sortTable,
 } from "../utils/tableUtils";
@@ -28,7 +28,7 @@ document.querySelector("a")?.insertAdjacentElement("afterend", nav);
 // TABLE HEADERS
 const tr = document.querySelector("tr") as HTMLTableRowElement;
 const headerNames = ["Product Name", "Product Brand", "Product Category"];
-const thList = createTableHeaders(productKeys, headerNames);
+const thList = createTableHeadersList(productKeys, headerNames);
 tr.append(...thList);
 
 // TABLE BODY
