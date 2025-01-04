@@ -9,7 +9,25 @@
 </head>
 
 <body>
-  <h1>Update Product</h1>
+  <form>
+    <section class="form">
+      <label for="productName">Product Name: </label>
+      <input type="text" name="productName" id="productName" required autofocus minlength="1">
+    </section>
+    <section class="form">
+      <label for="productBrand">Product Brand: </label>
+      <input type="text" name="productBrand" id="productBrand" required minlength="1">
+    </section>
+    <section class="form">
+      <label for="productCategory">Product Category: </label>
+      <input type="text" name="productCategory" id="productCategory" required minlength="1">
+    </section>
+    <section class="form">
+      <button type="submit">Update Product</button>
+    </section>
+  </form>
+  <div id="message"></div>
+  <a href="/">Return to Home Page</a>
 </body>
 
 </html>
