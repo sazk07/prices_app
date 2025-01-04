@@ -5,12 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <script src="../src/scripts/purchase/detail.ts"></script>
-  <script src="../src/scripts/purchase/delete.ts"></script>
+  <script src="../src/scripts/purchase/detail.ts" type="module"></script>
+  <script src="../src/scripts/purchase/delete.ts" type="module"></script>
 </head>
 
 <body>
-  <h1>Hello from Purchase Detail</h1>
+  <h1>Purchase Detail</h1>
+  <h1 id="purchaseId"></h1>
+  <p id="purchaseDate"></p>
+  <p id="productName"></p>
+  <p id="productBrand"></p>
+  <p id="productCategory"></p>
+  <p id="shopName"></p>
+  <p id="shopLocation"></p>
+  <p id="quantity"></p>
+  <p id="price"></p>
+  <p id="taxRate"></p>
+  <p id="taxAmount"></p>
+  <p id="mrpTaxAmount"></p>
+  <p id="nonMrpTaxAmount"></p>
+  <button type="button" id="deletePurchase">Delete Purchase</button>
 </body>
 
 </html>
