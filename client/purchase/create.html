@@ -9,7 +9,54 @@
 </head>
 
 <body>
-  <h1>Hello from Create New Purchase</h1>
+  <h1>Create New Purchase</h1>
+  <form>
+    <section class="form">
+      <label for="purchaseDate">Purchase Date: </label>
+      <input type="date" name="purchaseDate" id="purchaseDate">
+    </section>
+    <section class="form">
+      <label for="productId">Product Name: </label>
+      <select name="productId" id="productId">
+        <option value="">--Please select a product--</option>
+        <!-- programmatically insert options here -->
+      </select>
+    </section>
+    <section class="form">
+      <label for="shopId">Shop Name: </label>
+      <select name="shopId" id="shopId">
+        <option value="">--Please select a shop--</option>
+        <!-- programmatically insert options here -->
+      </select>
+    </section>
+    <section class="form">
+      <label for="quantity">Quantity: </label>
+      <input type="text" id="quantity" name="quantity" required minlength="1">
+    </section>
+    <section class="form">
+      <label for="price">Price: </label>
+      <input type="text" id="price" name="price" required minlength="1">
+    </section>
+    <section class="form">
+      <label for="taxRate">Tax Rate: </label>
+      <input type="text" id="taxRate">
+    </section>
+    <section class="form">
+      <label for="taxAmount">Tax Amount: </label>
+      <input type="text" id="taxAmount">
+    </section>
+    <section class="form">
+      <label for="mrpTaxAmount">MRP Tax Amount: </label>
+      <input type="text" id="mrpTaxAmount">
+      <label for="nonMrpTaxAmount">Non-MRP Tax Amount</label>
+      <input type="text" id="nonMrpTaxAmount">
+    </section>
+    <section class="form">
+      <button type="submit">Add Purchase</button>
+    </section>
+  </form>
+  <a href="/">Return to Home Page</a>
+  <div id="message"></div>
 </body>
 
 </html>
