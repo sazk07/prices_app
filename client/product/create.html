@@ -10,6 +10,25 @@
 
 <body>
   <h1>Hello from Create New Product</h1>
+  <form>
+    <section class="form">
+      <label for="productName">Product Name: </label>
+      <input type="text" name="productName" id="productName" required minlength="1">
+    </section>
+    <section class="form">
+      <label for="productBrand">Product Brand: </label>
+      <input type="text" name="productBrand" id="productBrand" required minlength="1">
+    </section>
+    <section class="form">
+      <label for="productCategory">Product Category: </ label>
+        <input type="text" name="productCategory" id="productCategory" required minlength="1">
+    </section>
+      <section class="form">
+        <button type="submit">Add Product</button>
+      </section>
+  </form>
+    <a href="/">Return to Home Page</a>
+    <div id="message"></div>
 </body>
 
 </html>
