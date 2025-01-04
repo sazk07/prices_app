@@ -3,14 +3,17 @@ import { ShopOutput } from "@dataTypes/shop.types";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 
-const nav = createNav();
-document.querySelector("body")?.insertAdjacentElement("afterbegin", nav);
 const shopId = new URLSearchParams(window.location.search).get("shopId");
 const shopData: ShopOutput = await getData(
   `http://localhost:3000/shop/${shopId}`,
 );
+
+const nav = createNav();
+document.querySelector("body")?.insertAdjacentElement("afterbegin", nav);
+
 const shopNameInput = document.querySelector("#shopName") as HTMLInputElement;
 shopNameInput.value = shopData.shopName;
+
 const shopLocationInput = document.querySelector(
   "#shopLocation",
 ) as HTMLInputElement;
