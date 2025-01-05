@@ -1,6 +1,6 @@
 import { ShopModel } from "@shop/models/shop.model.js";
 import { NextFunction, Request, Response } from "express";
-import { beforeEach, describe, it } from "node:test";
+import { before, beforeEach, describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { createShop } from "@shop/controllers/shop.create.controller.js";
 import { DatabaseSync } from "node:sqlite";
@@ -16,8 +16,11 @@ describe("Shop Controllers", () => {
   let mockRes: Partial<Response>;
   let mockNext: NextFunction;
 
-  beforeEach(async () => {
+  before(async () => {
     mockShopModel = await ShopModel();
+  });
+
+  beforeEach(async () => {
     mockReq = {};
     mockRes = {
       status: function (code: number) {
@@ -67,6 +70,7 @@ describe("Shop Controllers", () => {
       const shops = mockShopModel
         .prepare("SELECT shopId, shopName, shopLocation FROM Shop")
         .all();
+
       await getAllShops(mockReq as Request, mockRes as Response, mockNext);
       assert.deepStrictEqual(mockRes["statusCode"], 200);
       assert.deepStrictEqual(mockRes.json, shops);
@@ -82,6 +86,7 @@ describe("Shop Controllers", () => {
         .prepare("INSERT INTO Shop (shopName, shopLocation) VALUES (?, ?)")
         .run(shopEntry.shopName, shopEntry.shopLocation)
         .lastInsertRowid as number;
+
       mockReq = {
         params: {
           id: shopId.toString(),
@@ -93,6 +98,7 @@ describe("Shop Controllers", () => {
         200,
         "Status code should be 200",
       );
+
       const shop = mockShopModel
         .prepare(
           "SELECT shopId, shopName, shopLocation FROM Shop WHERE shopId = ?",
@@ -118,6 +124,7 @@ describe("Shop Controllers", () => {
         shopName: "Test Shop 104",
         shopLocation: "Test Location 104",
       };
+
       mockReq = {
         params: {
           id: shopId.toString(),
@@ -140,6 +147,7 @@ describe("Shop Controllers", () => {
         .prepare("INSERT INTO Shop (shopName, shopLocation) VALUES (?, ?)")
         .run(shopEntry.shopName, shopEntry.shopLocation)
         .lastInsertRowid as number;
+
       mockReq = {
         params: {
           id: shopId.toString(),

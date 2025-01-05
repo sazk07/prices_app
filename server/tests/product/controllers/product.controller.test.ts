@@ -2,25 +2,22 @@ import { ProductEntry } from "@dataTypes/product.types.js";
 import { ProductModel } from "@product/models/product.model.js";
 import { NextFunction, Request, Response } from "express";
 import { DatabaseSync } from "node:sqlite";
-import { after, afterEach, before, beforeEach, describe, it } from "node:test";
+import { before, beforeEach, describe, it } from "node:test";
 import { createProduct } from "@product/controllers/product.create.controller.js";
 import assert from "node:assert/strict";
 import { getAllProducts } from "@product/controllers/product.getAll.controller.js";
 import { getProductById } from "@product/controllers/product.getById.controller.js";
 import { updateProduct } from "@product/controllers/product.update.controller.js";
 import { deleteProduct } from "@product/controllers/product.delete.controller.js";
-import connectToDatabase from "@configs/database.js";
 
 describe("Product Controllers", () => {
-  let mockProductModel: ProductModel;
+  let mockProductModel: DatabaseSync;
   let mockReq: Partial<Request>;
   let mockRes: Partial<Response>;
   let mockNext: NextFunction;
-  let db: DatabaseSync;
 
   before(async () => {
-    mockProductModel = await ProductModel.createInstance();
-    db = await connectToDatabase();
+    mockProductModel = await ProductModel();
   });
 
   beforeEach(async () => {
@@ -38,28 +35,32 @@ describe("Product Controllers", () => {
     mockNext = () => {};
   });
 
-  afterEach(() => {
-    db.prepare("DELETE FROM Product").run();
-  });
-
-  after(() => db.close());
-
   describe("createProduct", () => {
     it("should create a new product and return the product ID and status 201", async () => {
-      const productEntry: ProductEntry = {
-        productName: "Another Test Product",
-        productBrand: "Another Test Brand",
-        productCategory: "Another Test Category",
+      const mockProductEntry: ProductEntry = {
+        productName: "Test Product 100",
+        productBrand: "Test Brand 100",
+        productCategory: "Test Category 100",
       };
-      const productId = await mockProductModel.create(productEntry);
+      const productId = mockProductModel
+        .prepare(
+          `
+          INSERT INTO Product
+            (productName, productBrand, productCategory)
+          VALUES (?, ?, ?)
+        `,
+        )
+        .run(
+          mockProductEntry.productName,
+          mockProductEntry.productBrand,
+          mockProductEntry.productCategory,
+        ).lastInsertRowid as number;
+
       mockReq = {
         body: {
-          productName: "Test Product",
-          productBrand: "Test Brand",
-          productCategory: "Test Category",
-        },
-        params: {
-          id: String(productId + 1),
+          productName: "Test Product 101",
+          productBrand: "Test Brand 101",
+          productCategory: "Test Category 101",
         },
       };
       await createProduct(mockReq as Request, mockRes as Response, mockNext);
@@ -68,26 +69,30 @@ describe("Product Controllers", () => {
         message: "Product created successfully",
         productId: productId + 1,
       });
+      // clean up
+      mockProductModel
+        .prepare("DELETE FROM Product WHERE productId = ?")
+        .run(productId);
+      mockProductModel
+        .prepare("DELETE FROM Product WHERE productId = ?")
+        .run(productId + 1);
     });
   });
   describe("getAllProducts controller", () => {
     it("should return an array of product objects", async () => {
-      const productEntries: ProductEntry[] = [
-        {
-          productName: "Test Product",
-          productBrand: "Test Brand",
-          productCategory: "Test Category",
-        },
-        {
-          productName: "Another Test Product",
-          productBrand: "Another Test Brand",
-          productCategory: "Another Test Category",
-        },
-      ];
-      for (const entry of productEntries) {
-        await mockProductModel.create(entry);
-      }
-      const products = await mockProductModel.findAll();
+      const products = mockProductModel
+        .prepare(
+          `
+        SELECT
+          productId,
+          productName,
+          productBrand,
+          productCategory
+        FROM Product
+      `,
+        )
+        .all();
+
       await getAllProducts(mockReq as Request, mockRes as Response, mockNext);
       assert.deepStrictEqual(mockRes["statusCode"], 200);
       assert.deepStrictEqual(mockRes.json, products);
@@ -96,12 +101,24 @@ describe("Product Controllers", () => {
   describe("getProductById", () => {
     it("should return a product object", async () => {
       const productEntry: ProductEntry = {
-        productName: "Test Product",
-        productBrand: "Test Brand",
-        productCategory: "Test Category",
+        productName: "Test Product 102",
+        productBrand: "Test Brand 102",
+        productCategory: "Test Category 102",
       };
-      const productId = await mockProductModel.create(productEntry);
-      const product = await mockProductModel.findById(productId);
+      const productId = mockProductModel
+        .prepare(
+          `
+          INSERT INTO Product
+            (productName, productBrand, productCategory)
+          VALUES (?, ?, ?)
+        `,
+        )
+        .run(
+          productEntry.productName,
+          productEntry.productBrand,
+          productEntry.productCategory,
+        ).lastInsertRowid as number;
+
       mockReq = {
         params: {
           id: String(productId),
@@ -109,22 +126,53 @@ describe("Product Controllers", () => {
       };
       await getProductById(mockReq as Request, mockRes as Response, mockNext);
       assert.deepStrictEqual(mockRes["statusCode"], 200);
+
+      const product = mockProductModel
+        .prepare(
+          `
+          SELECT
+            productId,
+            productName,
+            productBrand,
+            productCategory
+          FROM Product
+          WHERE productId = ?
+        `,
+        )
+        .get(productId);
       assert.deepStrictEqual(mockRes.json, product);
+      // clean up
+      mockProductModel
+        .prepare("DELETE FROM Product WHERE productId = ?")
+        .run(productId);
     });
   });
   describe("updateProduct", () => {
     it("should update a product and return status 204", async () => {
       const productEntry: ProductEntry = {
-        productName: "Test Product",
-        productBrand: "Test Brand",
-        productCategory: "Test Category",
+        productName: "Test Product 103",
+        productBrand: "Test Brand 103",
+        productCategory: "Test Category 103",
       };
-      const productId = await mockProductModel.create(productEntry);
+      const productId = mockProductModel
+        .prepare(
+          `
+          INSERT INTO Product
+            (productName, productBrand, productCategory)
+          VALUES (?, ?, ?)
+        `,
+        )
+        .run(
+          productEntry.productName,
+          productEntry.productBrand,
+          productEntry.productCategory,
+        ).lastInsertRowid as number;
       const updatedProductEntry: ProductEntry = {
-        productName: "Updated Test Product",
-        productBrand: "Updated Test Brand",
-        productCategory: "Updated Test Category",
+        productName: "Test Product 104",
+        productBrand: "Test Brand 104",
+        productCategory: "Test Category 104",
       };
+
       mockReq = {
         params: {
           id: productId.toString(),
@@ -133,16 +181,33 @@ describe("Product Controllers", () => {
       };
       await updateProduct(mockReq as Request, mockRes as Response, mockNext);
       assert.deepStrictEqual(mockRes["statusCode"], 204);
+      // clean up
+      mockProductModel
+        .prepare("DELETE FROM Product WHERE productId = ?")
+        .run(productId);
     });
   });
   describe("deleteProduct", () => {
     it("should delete a product and return status 204", async () => {
       const productEntry: ProductEntry = {
-        productName: "Test Product",
-        productBrand: "Test Brand",
-        productCategory: "Test Category",
+        productName: "Test Product 105",
+        productBrand: "Test Brand 105",
+        productCategory: "Test Category 105",
       };
-      const productId = await mockProductModel.create(productEntry);
+      const productId = mockProductModel
+        .prepare(
+          `
+          INSERT INTO Product
+            (productName, productBrand, productCategory)
+          VALUES (?, ?, ?)
+        `,
+        )
+        .run(
+          productEntry.productName,
+          productEntry.productBrand,
+          productEntry.productCategory,
+        ).lastInsertRowid as number;
+
       mockReq = {
         params: {
           id: productId.toString(),
