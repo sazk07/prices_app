@@ -9,7 +9,6 @@
     "devstart": "tsx watch --exclude \"../database/**/*\" --experimental-sqlite ./src/connect.ts",
     "serverstart": "DEBUG=.:* npm run devstart",
     "noEmit": "tsc --noEmit",
-    "test:shop-model": "tsx --experimental-sqlite --test ./tests/shop/models/*.ts",
     "test:shop-controller": "tsx --experimental-sqlite --test ./tests/shop/controllers/*.ts",
     "test:product-model": "tsx --experimental-sqlite --test ./tests/product/models/*.ts",
     "test:product-controller": "tsx --experimental-sqlite --test ./tests/product/controllers/*.ts",

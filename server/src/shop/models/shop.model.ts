@@ -1,7 +1,6 @@
 import connectToDatabase from "@configs/database.js";
 import { ModelError } from "@utils/model.error.js";
 
-// TODO: add User table
 export const ShopModel = async () => {
   try {
     const db = await connectToDatabase();

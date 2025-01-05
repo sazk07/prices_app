@@ -34,7 +34,6 @@ export const updateShop = async (
       const validationError = new NotFoundError("Shop not found");
       next(validationError);
     }
-    // TODO: redirect to /shops on update ?
     res.status(204).end();
   } catch (err) {
     console.error(err);
