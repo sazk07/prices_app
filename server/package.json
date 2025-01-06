@@ -10,9 +10,7 @@
     "serverstart": "DEBUG=.:* npm run devstart",
     "noEmit": "tsc --noEmit",
     "test:shop-controller": "tsx --experimental-sqlite --test ./tests/shop/controllers/*.ts",
-    "test:product-model": "tsx --experimental-sqlite --test ./tests/product/models/*.ts",
     "test:product-controller": "tsx --experimental-sqlite --test ./tests/product/controllers/*.ts",
-    "test:purchase-model": "tsx --experimental-sqlite --test ./tests/purchase/models/purchase.model.test.ts",
     "test:purchase-controller": "tsx --experimental-sqlite --test ./tests/purchase/controllers/purchase.controller.test.ts",
     "test:routes": "tsx --experimental-sqlite --test ./tests/functionalTests.test.ts"
   },

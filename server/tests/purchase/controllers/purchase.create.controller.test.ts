@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { PurchaseModel } from "@purchase/models/purchase.model.js";
 import { DatabaseSync } from "node:sqlite";
-import { after, afterEach, before, beforeEach, it, suite } from "node:test";
+import { afterEach, before, beforeEach, it, suite } from "node:test";
 import { PurchaseEntry } from "@dataTypes/purchase.types.js";
 import { ShopEntry } from "@dataTypes/shop.types.js";
 import { ShopModel } from "@shop/models/shop.model.js";
@@ -9,42 +9,54 @@ import { ProductEntry } from "@dataTypes/product.types.js";
 import { ProductModel } from "@product/models/product.model.js";
 import { createPurchase } from "@purchase/controllers/purchase.create.controller.js";
 import assert from "node:assert/strict";
-import connectToDatabase from "@configs/database.js";
 
 export const testCreatePurchase = () => {
   suite("PurchaseController", () => {
-    let mockPurchaseModel: PurchaseModel;
-    let mockShopModel: ShopModel;
-    let mockProductModel: ProductModel;
+    let mockPurchaseModel: DatabaseSync;
+    let mockShopModel: DatabaseSync;
+    let mockProductModel: DatabaseSync;
     let mockReq: Partial<Request>;
     let mockRes: Partial<Response>;
     let mockNext: NextFunction;
-    let db: DatabaseSync;
     let shopId: number;
     let productId: number;
+    let shopEntryData: ShopEntry;
+    let productEntryData: ProductEntry;
 
     before(async () => {
-      mockPurchaseModel = await PurchaseModel.createInstance();
-      mockShopModel = await ShopModel.createInstance();
-      mockProductModel = await ProductModel.createInstance();
-      db = await connectToDatabase();
+      mockPurchaseModel = await PurchaseModel();
+      mockShopModel = await ShopModel();
+      mockProductModel = await ProductModel();
     });
 
     beforeEach(async () => {
-      db.prepare("DELETE FROM Shop").run();
-      db.prepare("DELETE FROM Product").run();
-      const shopEntryData: ShopEntry = {
-        shopName: "Another Test Shop",
-        shopLocation: "Another Test Location",
+      shopEntryData = {
+        shopName: "Test Shop from purchaseCreate",
+        shopLocation: "Test Location from purchaseCreate",
       };
-      shopId = await mockShopModel.create(shopEntryData);
+      shopId = mockShopModel
+        .prepare("INSERT INTO Shop (shopName, shopLocation) VALUES (?, ?)")
+        .run(shopEntryData.shopName, shopEntryData.shopLocation)
+        .lastInsertRowid as number;
 
-      const productEntryData: ProductEntry = {
-        productName: "Another Test Product",
-        productCategory: "Another Test Category",
-        productBrand: "Another Test Brand",
+      productEntryData = {
+        productName: "Test Product from purchaseCreate",
+        productBrand: "Test Brand from purchaseCreate",
+        productCategory: "Test Category from purchaseCreate",
       };
-      productId = await mockProductModel.create(productEntryData);
+      productId = mockProductModel
+        .prepare(
+          `
+          INSERT INTO Product
+          (productName, productBrand, productCategory)
+          VALUES (?, ?, ?)
+        `,
+        )
+        .run(
+          productEntryData.productName,
+          productEntryData.productBrand,
+          productEntryData.productCategory,
+        ).lastInsertRowid as number;
 
       mockReq = {};
       mockRes = {
@@ -61,10 +73,11 @@ export const testCreatePurchase = () => {
     });
 
     afterEach(() => {
-      db.prepare("DELETE FROM Purchase").run();
+      mockShopModel.prepare("DELETE FROM Shop WHERE shopId = ?").run(shopId);
+      mockProductModel
+        .prepare("DELETE FROM Product WHERE productId = ?")
+        .run(productId);
     });
-
-    after(() => db.close());
 
     suite("createPurchase controller", () => {
       suite("with taxRate", () => {
@@ -77,7 +90,23 @@ export const testCreatePurchase = () => {
             price: 19,
             taxRate: 17,
           };
-          const purchaseId = await mockPurchaseModel.create(purchaseEntry);
+          const purchaseId = mockPurchaseModel
+            .prepare(
+              `
+              INSERT INTO Purchase
+                (shopId, productId, purchaseDate, quantity, price, taxRate)
+              VALUES (?, ?, ?, ?, ?, ?)
+            `,
+            )
+            .run(
+              purchaseEntry.shopId,
+              purchaseEntry.productId,
+              purchaseEntry.purchaseDate,
+              purchaseEntry.quantity,
+              purchaseEntry.price,
+              purchaseEntry.taxRate ?? 0,
+            ).lastInsertRowid as number;
+
           mockReq = {
             body: {
               shopId,
@@ -86,9 +115,6 @@ export const testCreatePurchase = () => {
               quantity: 100,
               price: 190,
               taxRate: 17,
-            },
-            params: {
-              id: String(purchaseId + 1),
             },
           };
           await createPurchase(
@@ -101,6 +127,13 @@ export const testCreatePurchase = () => {
             message: "Purchase created successfully",
             purchaseId: purchaseId + 1,
           });
+          // clean up
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId);
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId + 1);
         });
       });
       suite("with taxAmount", () => {
@@ -113,7 +146,23 @@ export const testCreatePurchase = () => {
             price: 19,
             taxAmount: 7,
           };
-          const purchaseId = await mockPurchaseModel.create(purchaseEntry);
+          const purchaseId = mockPurchaseModel
+            .prepare(
+              `
+              INSERT INTO Purchase
+                (shopId, productId, purchaseDate, quantity, price, taxAmount)
+              VALUES (?, ?, ?, ?, ?, ?)
+            `,
+            )
+            .run(
+              purchaseEntry.shopId,
+              purchaseEntry.productId,
+              purchaseEntry.purchaseDate,
+              purchaseEntry.quantity,
+              purchaseEntry.price,
+              purchaseEntry.taxAmount ?? 0,
+            ).lastInsertRowid as number;
+
           mockReq = {
             body: {
               shopId,
@@ -122,9 +171,6 @@ export const testCreatePurchase = () => {
               quantity: 100,
               price: 190,
               taxAmount: 17,
-            },
-            params: {
-              id: String(purchaseId + 1),
             },
           };
           await createPurchase(
@@ -137,6 +183,13 @@ export const testCreatePurchase = () => {
             message: "Purchase created successfully",
             purchaseId: purchaseId + 1,
           });
+          // clean up
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId);
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId + 1);
         });
       });
       suite("with MRP Tax Amount and Non-MRP Tax Amount", () => {
@@ -150,7 +203,37 @@ export const testCreatePurchase = () => {
             mrpTaxAmount: 10,
             nonMrpTaxAmount: 4,
           };
-          const purchaseId = await mockPurchaseModel.create(purchaseEntry);
+          const purchaseId = mockPurchaseModel
+            .prepare(
+              `
+              INSERT INTO Purchase (
+                shopId,
+                productId,
+                purchaseDate,
+                quantity,
+                price,
+                mrpTaxAmount,
+                nonMrpTaxAmount)
+              VALUES (
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?)
+            `,
+            )
+            .run(
+              purchaseEntry.shopId,
+              purchaseEntry.productId,
+              purchaseEntry.purchaseDate,
+              purchaseEntry.quantity,
+              purchaseEntry.price,
+              purchaseEntry.mrpTaxAmount ?? 0,
+              purchaseEntry.nonMrpTaxAmount ?? 0,
+            ).lastInsertRowid as number;
+
           mockReq = {
             body: {
               shopId,
@@ -160,9 +243,6 @@ export const testCreatePurchase = () => {
               price: 190,
               mrpTaxAmount: 10,
               nonMrpTaxAmount: 4,
-            },
-            params: {
-              id: String(purchaseId + 1),
             },
           };
           await createPurchase(
@@ -175,6 +255,13 @@ export const testCreatePurchase = () => {
             message: "Purchase created successfully",
             purchaseId: purchaseId + 1,
           });
+          // clean up
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId);
+          mockPurchaseModel
+            .prepare("DELETE FROM Purchase WHERE purchaseId = ?")
+            .run(purchaseId + 1);
         });
       });
     });
