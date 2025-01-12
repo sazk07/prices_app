@@ -5,7 +5,7 @@ import purchaseRouter from "./purchase/routes/purchase.routes.js";
 import notFoundRouter from "./utils/notFound.routes.js";
 import { logError, errorHandler } from "./utils/errorHandler.js";
 import connectToDatabase from "@configs/database.js";
-import homePageRouter from "./home/routers/home.routes.js";
+import homePageRouter from "./home/routes/home.routes.js";
 import cors from "cors";
 import { corsOptions } from "@utils/corsOptions.js";
 
