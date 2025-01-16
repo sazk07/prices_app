@@ -30,7 +30,6 @@ export const PurchaseModel = async () => {
       CREATE INDEX IF NOT EXISTS IDXPURCHASEDATE ON PURCHASE(purchaseDate);
     `,
     );
-    console.log("Purchase table and indexes created");
     return db;
   } catch (err) {
     console.error("Error creating PurchaseModel:", err);

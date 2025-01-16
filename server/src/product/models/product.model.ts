@@ -22,7 +22,6 @@ export const ProductModel = async () => {
       CREATE INDEX IF NOT EXISTS idxProductCategory ON Product(productCategory);
     `,
     ).run();
-    console.log("Product table and indexes created");
     return db;
   } catch (err) {
     console.error("Error creating ProductModel:", err);

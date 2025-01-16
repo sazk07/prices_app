@@ -6,6 +6,8 @@ import {
   getCountOfPurchases,
   getCountOfShops,
 } from "@utils/home.utils.js";
+import { ShopModel } from "@shop/models/shop.model.js";
+import { ProductModel } from "@product/models/product.model.js";
 
 export const homePage = async (
   _req: Request,
@@ -13,6 +15,8 @@ export const homePage = async (
   next: NextFunction,
 ) => {
   try {
+    await ShopModel();
+    await ProductModel();
     const purchaseModel = await PurchaseModel();
     const countOfShops = await getCountOfShops(purchaseModel);
     if (!countOfShops) {
