@@ -23,7 +23,7 @@ id.textContent = `ID: ${shopData.shopId}`;
 const name = document.querySelector("#shopName") as HTMLParagraphElement;
 name.textContent = `Shop Name: ${shopData.shopName}`;
 
-const location = document.querySelector("#location") as HTMLParagraphElement;
+const location = document.querySelector("#shopLocation") as HTMLParagraphElement;
 location.textContent = `Location: ${shopData.shopLocation}`;
 
 const updateAnchor = document.createElement("a");
