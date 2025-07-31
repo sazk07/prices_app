@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { GoneError } from "@utils/http-errors-enhanced/errors.js";
 import { ShopModel } from "@shop/models/shop.model.js";
 

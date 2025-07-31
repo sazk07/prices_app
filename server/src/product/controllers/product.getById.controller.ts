@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { ProductModel } from "@product/models/product.model.js";
-import { ProductOutput } from "@dataTypes/product.types.js";
+import { type ProductOutput } from "@dataTypes/product.types.js";
 
 export const getProductById = async (
   req: Request,

@@ -6,7 +6,7 @@ import {
 } from "./statuses.js";
 import {
   addAdditionalProperties,
-  GenericObject,
+  type GenericObject,
   serializeError,
   toUpperFirst,
 } from "./utils.js";

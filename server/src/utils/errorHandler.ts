@@ -1,4 +1,9 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import {
+  type ErrorRequestHandler,
+  type NextFunction,
+  type Request,
+  type Response,
+} from "express";
 
 export const logError: ErrorRequestHandler = (err, req, _res, next) => {
   req.app.get("env") === "development" ? console.error(err.stack) : "";

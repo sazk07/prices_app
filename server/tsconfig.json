@@ -30,9 +30,12 @@
       "./src",
       "./tests"
     ],
-    "module": "node16",
+    "module": "nodenext",
     "lib": [
-      "es2023"
+      "es2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator"
     ],
     "moduleResolution": "node16",
     "outDir": "./dist",

@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { NotFoundError } from "@utils/http-errors-enhanced/errors.js";
 import { ShopModel } from "@shop/models/shop.model.js";
-import { ShopOutput } from "@dataTypes/shop.types.js";
+import { type ShopOutput } from "@dataTypes/shop.types.js";
 
 export const getShopById = async (
   req: Request,
@@ -25,7 +25,6 @@ export const getShopById = async (
         Shop
       WHERE
         shopId = ?
-
     `,
     );
     const result = await Promise.resolve(stmt.get(idNumber));

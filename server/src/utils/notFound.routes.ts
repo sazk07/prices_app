@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { type NextFunction, type Request, type Response } from "express";
 import { HttpError } from "./http-errors-enhanced/base.js";
 
 const notFoundRouter = (_req: Request, _res: Response, next: NextFunction) => {

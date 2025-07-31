@@ -24,6 +24,9 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     "target": "es2022",
+
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Strictest",

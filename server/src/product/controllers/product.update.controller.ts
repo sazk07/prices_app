@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { ProductModel } from "@product/models/product.model.js";
 import { NotFoundError } from "@utils/http-errors-enhanced/errors.js";
 

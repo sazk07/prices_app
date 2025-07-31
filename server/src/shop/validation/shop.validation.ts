@@ -1,6 +1,6 @@
 import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
 import { validateId, validateRequest } from "@utils/validation.js";
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { z, ZodError } from "zod";
 
 const shopSchema = z.object({

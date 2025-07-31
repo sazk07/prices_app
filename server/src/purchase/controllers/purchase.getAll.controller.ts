@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { PurchaseModel } from "@purchase/models/purchase.model.js";
 import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
-import { PurchaseView } from "@dataTypes/purchase.types.js";
+import { type PurchaseView } from "@dataTypes/purchase.types.js";
 
 export const getAllPurchases = async (
   _req: Request,
@@ -37,9 +37,9 @@ export const getAllPurchases = async (
     res.statusCode = 200;
     res.json(purchases);
   } catch (err) {
-    const validationError = new InternalServerError({
+    const reportedErr = new InternalServerError({
       error: err instanceof Error ? err.message : String(err),
     });
-    next(validationError);
+    next(reportedErr);
   }
 };

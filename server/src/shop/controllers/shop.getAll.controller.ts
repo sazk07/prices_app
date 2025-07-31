@@ -1,7 +1,7 @@
-import { ShopOutput } from "@dataTypes/shop.types.js";
+import { type ShopOutput } from "@dataTypes/shop.types.js";
 import { ShopModel } from "@shop/models/shop.model.js";
 import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
 export const getAllShops = async (
   _req: Request,
@@ -25,9 +25,9 @@ export const getAllShops = async (
     res.statusCode = 200;
     res.json(shops);
   } catch (err) {
-    const validationError = new InternalServerError({
+    const reportedErr = new InternalServerError({
       error: err instanceof Error ? err.message : String(err),
     });
-    next(validationError);
+    next(reportedErr);
   }
 };
