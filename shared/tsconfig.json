@@ -3,9 +3,12 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "node16",
+    "module": "nodenext",
     "lib": [
-      "es2023"
+      "es2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator"
     ],
     "declaration": true,
     "declarationMap": true,

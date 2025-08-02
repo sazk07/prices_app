@@ -26,10 +26,6 @@
         "./src/purchase/*"
       ]
     },
-    "rootDirs": [
-      "./src",
-      "./tests"
-    ],
     "module": "nodenext",
     "lib": [
       "es2024",

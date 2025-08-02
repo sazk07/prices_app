@@ -1,5 +1,5 @@
-import { z, ZodError, ZodTypeAny } from "zod";
-import { Request } from "express";
+import { z, ZodError, type ZodTypeAny } from "zod";
+import { type Request } from "express";
 
 export const validateRequest = async <T extends ZodTypeAny>(
   req: Request,
