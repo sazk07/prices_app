@@ -2,8 +2,8 @@ import "@/css/style.css";
 import "@/css/tableStyle.css";
 import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
-import { ShopOutput } from "@dataTypes/shop.types";
-import { Column, SortState } from "@dataTypes/generics.types";
+import { type ShopOutput } from "@dataTypes/shop.types";
+import type { Column, SortState } from "@dataTypes/generics.types";
 import { getKeys } from "../utils/getkeys";
 import {
   createTableBody,

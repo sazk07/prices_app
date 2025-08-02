@@ -1,5 +1,5 @@
 import "@/css/style.css";
-import { ProductOutput } from "@dataTypes/product.types";
+import { type ProductOutput } from "@dataTypes/product.types";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 

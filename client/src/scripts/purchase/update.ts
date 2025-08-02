@@ -1,5 +1,5 @@
 import "@/css/style.css";
-import { PurchaseView } from "@dataTypes/purchase.types";
+import { type PurchaseView } from "@dataTypes/purchase.types";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 

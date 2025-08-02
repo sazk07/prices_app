@@ -1,4 +1,4 @@
-import { ShopOutput } from "@dataTypes/shop.types";
+import { type ShopOutput } from "@dataTypes/shop.types";
 import "@/css/style.css";
 import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";

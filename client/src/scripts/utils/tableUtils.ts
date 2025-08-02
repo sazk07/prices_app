@@ -1,4 +1,4 @@
-import { Column, SortState } from "@dataTypes/generics.types";
+import type { Column, SortState } from "@dataTypes/generics.types";
 
 export const createTableHeadersList = <T>(
   keysList: T[],

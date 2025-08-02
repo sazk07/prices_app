@@ -2,13 +2,13 @@ import "@/css/style.css";
 import "@/css/tableStyle.css";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
-import { ProductOutput } from "@dataTypes/product.types";
+import { type ProductOutput } from "@dataTypes/product.types";
 import {
   createTableHeadersList,
   createTableBody,
   sortTable as sortTable,
 } from "../utils/tableUtils";
-import { Column, SortState } from "@dataTypes/generics.types";
+import type { Column, SortState } from "@dataTypes/generics.types";
 import { getKeys } from "../utils/getkeys";
 
 const LINK_COLUMN: Column<ProductOutput> = {

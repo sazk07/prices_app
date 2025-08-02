@@ -1,6 +1,6 @@
-import { ProductCount } from "@dataTypes/product.types.js";
-import { PurchaseCount } from "@dataTypes/purchase.types.js";
-import { ShopCount } from "@dataTypes/shop.types.js";
+import { type ProductCount } from "@dataTypes/product.types.js";
+import { type PurchaseCount } from "@dataTypes/purchase.types.js";
+import { type ShopCount } from "@dataTypes/shop.types.js";
 import { DatabaseSync } from "node:sqlite";
 
 export const getCountOfShops = async (db: DatabaseSync) => {
