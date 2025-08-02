@@ -20,7 +20,7 @@ export class UnauthorizedError extends HttpError {
   static phrase: string = "Unauthorized.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
-    super(400, message, properties);
+    super(401, message, properties);
     this.name = "UnauthorizedError";
   }
 }
@@ -32,7 +32,7 @@ export class PaymentRequiredError extends HttpError {
   static phrase: string = "Payment required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
-    super(400, message, properties);
+    super(402, message, properties);
     this.name = "PaymentRequiredError";
   }
 }
