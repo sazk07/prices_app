@@ -31,7 +31,7 @@ export const addAdditionalProperties = (
 
 export const serializeError = (
   error: Error,
-  omitStack: boolean = false,
+  omitStack = false,
 ): GenericObject => {
   const tag = (error as NodeError).code ?? error.name ?? "Error";
   const serialized: GenericObject = {

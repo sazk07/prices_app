@@ -2,10 +2,10 @@ import { HttpError } from "./base.js";
 import { type GenericObject } from "./utils.js";
 
 export class BadRequestError extends HttpError {
-  static status: number = 400;
-  static error: string = "BadRequest";
-  static message: string = "Bad Request";
-  static phrase: string = "Bad request.";
+  static status = 400;
+  static error = "BadRequest";
+  static message = "Bad Request";
+  static phrase = "Bad request.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(400, message, properties);
@@ -14,10 +14,10 @@ export class BadRequestError extends HttpError {
 }
 
 export class UnauthorizedError extends HttpError {
-  static status: number = 401;
-  static error: string = "Unauthorized";
-  static message: string = "Unauthorized";
-  static phrase: string = "Unauthorized.";
+  static status = 401;
+  static error = "Unauthorized";
+  static message = "Unauthorized";
+  static phrase = "Unauthorized.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(401, message, properties);
@@ -26,10 +26,10 @@ export class UnauthorizedError extends HttpError {
 }
 
 export class PaymentRequiredError extends HttpError {
-  static status: number = 402;
-  static error: string = "PaymentRequired";
-  static message: string = "Payment Required";
-  static phrase: string = "Payment required.";
+  static status = 402;
+  static error = "PaymentRequired";
+  static message = "Payment Required";
+  static phrase = "Payment required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(402, message, properties);
@@ -38,10 +38,10 @@ export class PaymentRequiredError extends HttpError {
 }
 
 export class ForbiddenError extends HttpError {
-  static status: number = 403;
-  static error: string = "Forbidden";
-  static message: string = "Forbidden";
-  static phrase: string = "Forbidden.";
+  static status = 403;
+  static error = "Forbidden";
+  static message = "Forbidden";
+  static phrase = "Forbidden.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(403, message, properties);
@@ -50,10 +50,10 @@ export class ForbiddenError extends HttpError {
 }
 
 export class NotFoundError extends HttpError {
-  static status: number = 404;
-  static error: string = "NotFound";
-  static message: string = "Not Found";
-  static phrase: string = "Not found.";
+  static status = 404;
+  static error = "NotFound";
+  static message = "Not Found";
+  static phrase = "Not found.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(404, message, properties);
@@ -62,10 +62,10 @@ export class NotFoundError extends HttpError {
 }
 
 export class MethodNotAllowedError extends HttpError {
-  static status: number = 405;
-  static error: string = "MethodNotAllowed";
-  static message: string = "Method Not Allowed";
-  static phrase: string = "Method not allowed.";
+  static status = 405;
+  static error = "MethodNotAllowed";
+  static message = "Method Not Allowed";
+  static phrase = "Method not allowed.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(405, message, properties);
@@ -74,10 +74,10 @@ export class MethodNotAllowedError extends HttpError {
 }
 
 export class NotAcceptableError extends HttpError {
-  static status: number = 406;
-  static error: string = "NotAcceptable";
-  static message: string = "Not Acceptable";
-  static phrase: string = "Not acceptable.";
+  static status = 406;
+  static error = "NotAcceptable";
+  static message = "Not Acceptable";
+  static phrase = "Not acceptable.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(406, message, properties);
@@ -86,10 +86,10 @@ export class NotAcceptableError extends HttpError {
 }
 
 export class ProxyAuthenticationRequiredError extends HttpError {
-  static status: number = 407;
-  static error: string = "ProxyAuthenticationRequired";
-  static message: string = "Proxy Authentication Required";
-  static phrase: string = "Proxy authentication required.";
+  static status = 407;
+  static error = "ProxyAuthenticationRequired";
+  static message = "Proxy Authentication Required";
+  static phrase = "Proxy authentication required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(407, message, properties);
@@ -98,10 +98,10 @@ export class ProxyAuthenticationRequiredError extends HttpError {
 }
 
 export class RequestTimeoutError extends HttpError {
-  static status: number = 408;
-  static error: string = "RequestTimeout";
-  static message: string = "Request Timeout";
-  static phrase: string = "Request timeout.";
+  static status = 408;
+  static error = "RequestTimeout";
+  static message = "Request Timeout";
+  static phrase = "Request timeout.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(408, message, properties);
@@ -110,10 +110,10 @@ export class RequestTimeoutError extends HttpError {
 }
 
 export class ConflictError extends HttpError {
-  static status: number = 409;
-  static error: string = "Conflict";
-  static message: string = "Conflict";
-  static phrase: string = "Conflict.";
+  static status = 409;
+  static error = "Conflict";
+  static message = "Conflict";
+  static phrase = "Conflict.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(409, message, properties);
@@ -122,10 +122,10 @@ export class ConflictError extends HttpError {
 }
 
 export class GoneError extends HttpError {
-  static status: number = 410;
-  static error: string = "Gone";
-  static message: string = "Gone";
-  static phrase: string = "Gone.";
+  static status = 410;
+  static error = "Gone";
+  static message = "Gone";
+  static phrase = "Gone.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(410, message, properties);
@@ -134,10 +134,10 @@ export class GoneError extends HttpError {
 }
 
 export class LengthRequiredError extends HttpError {
-  static status: number = 411;
-  static error: string = "LengthRequired";
-  static message: string = "Length Required";
-  static phrase: string = "Length required.";
+  static status = 411;
+  static error = "LengthRequired";
+  static message = "Length Required";
+  static phrase = "Length required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(411, message, properties);
@@ -146,10 +146,10 @@ export class LengthRequiredError extends HttpError {
 }
 
 export class PreconditionFailedError extends HttpError {
-  static status: number = 412;
-  static error: string = "PreconditionFailed";
-  static message: string = "Precondition Failed";
-  static phrase: string = "Precondition failed.";
+  static status = 412;
+  static error = "PreconditionFailed";
+  static message = "Precondition Failed";
+  static phrase = "Precondition failed.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(412, message, properties);
@@ -158,10 +158,10 @@ export class PreconditionFailedError extends HttpError {
 }
 
 export class PayloadTooLargeError extends HttpError {
-  static status: number = 413;
-  static error: string = "PayloadTooLarge";
-  static message: string = "Payload Too Large";
-  static phrase: string = "Payload too large.";
+  static status = 413;
+  static error = "PayloadTooLarge";
+  static message = "Payload Too Large";
+  static phrase = "Payload too large.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(413, message, properties);
@@ -170,10 +170,10 @@ export class PayloadTooLargeError extends HttpError {
 }
 
 export class URITooLongError extends HttpError {
-  static status: number = 414;
-  static error: string = "URITooLong";
-  static message: string = "URI Too Long";
-  static phrase: string = "Uri too long.";
+  static status = 414;
+  static error = "URITooLong";
+  static message = "URI Too Long";
+  static phrase = "Uri too long.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(414, message, properties);
@@ -182,10 +182,10 @@ export class URITooLongError extends HttpError {
 }
 
 export class UnsupportedMediaTypeError extends HttpError {
-  static status: number = 415;
-  static error: string = "UnsupportedMediaType";
-  static message: string = "Unsupported Media Type";
-  static phrase: string = "Unsupported media type.";
+  static status = 415;
+  static error = "UnsupportedMediaType";
+  static message = "Unsupported Media Type";
+  static phrase = "Unsupported media type.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(415, message, properties);
@@ -194,10 +194,10 @@ export class UnsupportedMediaTypeError extends HttpError {
 }
 
 export class RangeNotSatisfiableError extends HttpError {
-  static status: number = 416;
-  static error: string = "RangeNotSatisfiable";
-  static message: string = "Range Not Satisfiable";
-  static phrase: string = "Range not satisfiable.";
+  static status = 416;
+  static error = "RangeNotSatisfiable";
+  static message = "Range Not Satisfiable";
+  static phrase = "Range not satisfiable.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(416, message, properties);
@@ -206,10 +206,10 @@ export class RangeNotSatisfiableError extends HttpError {
 }
 
 export class ExpectationFailedError extends HttpError {
-  static status: number = 417;
-  static error: string = "ExpectationFailed";
-  static message: string = "Expectation Failed";
-  static phrase: string = "Expectation failed.";
+  static status = 417;
+  static error = "ExpectationFailed";
+  static message = "Expectation Failed";
+  static phrase = "Expectation failed.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(417, message, properties);
@@ -218,10 +218,10 @@ export class ExpectationFailedError extends HttpError {
 }
 
 export class ImaTeapotError extends HttpError {
-  static status: number = 418;
-  static error: string = "ImaTeapot";
-  static message: string = "I'm a Teapot";
-  static phrase: string = "I'm a teapot.";
+  static status = 418;
+  static error = "ImaTeapot";
+  static message = "I'm a Teapot";
+  static phrase = "I'm a teapot.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(418, message, properties);
@@ -230,10 +230,10 @@ export class ImaTeapotError extends HttpError {
 }
 
 export class MisdirectedRequestError extends HttpError {
-  static status: number = 421;
-  static error: string = "MisdirectedRequest";
-  static message: string = "Misdirected Request";
-  static phrase: string = "Misdirected request.";
+  static status = 421;
+  static error = "MisdirectedRequest";
+  static message = "Misdirected Request";
+  static phrase = "Misdirected request.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(421, message, properties);
@@ -242,10 +242,10 @@ export class MisdirectedRequestError extends HttpError {
 }
 
 export class UnprocessableEntityError extends HttpError {
-  static status: number = 422;
-  static error: string = "UnprocessableEntity";
-  static message: string = "Unprocessable Entity";
-  static phrase: string = "Unprocessable entity.";
+  static status = 422;
+  static error = "UnprocessableEntity";
+  static message = "Unprocessable Entity";
+  static phrase = "Unprocessable entity.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(422, message, properties);
@@ -254,10 +254,10 @@ export class UnprocessableEntityError extends HttpError {
 }
 
 export class LockedError extends HttpError {
-  static status: number = 423;
-  static error: string = "Locked";
-  static message: string = "Locked";
-  static phrase: string = "Locked.";
+  static status = 423;
+  static error = "Locked";
+  static message = "Locked";
+  static phrase = "Locked.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(423, message, properties);
@@ -266,10 +266,10 @@ export class LockedError extends HttpError {
 }
 
 export class FailedDependencyError extends HttpError {
-  static status: number = 424;
-  static error: string = "FailedDependency";
-  static message: string = "Failed Dependency";
-  static phrase: string = "Failed dependency.";
+  static status = 424;
+  static error = "FailedDependency";
+  static message = "Failed Dependency";
+  static phrase = "Failed dependency.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(424, message, properties);
@@ -278,10 +278,10 @@ export class FailedDependencyError extends HttpError {
 }
 
 export class TooEarlyError extends HttpError {
-  static status: number = 425;
-  static error: string = "TooEarly";
-  static message: string = "Too Early";
-  static phrase: string = "Too early.";
+  static status = 425;
+  static error = "TooEarly";
+  static message = "Too Early";
+  static phrase = "Too early.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(425, message, properties);
@@ -290,10 +290,10 @@ export class TooEarlyError extends HttpError {
 }
 
 export class UpgradeRequiredError extends HttpError {
-  static status: number = 426;
-  static error: string = "UpgradeRequired";
-  static message: string = "Upgrade Required";
-  static phrase: string = "Upgrade required.";
+  static status = 426;
+  static error = "UpgradeRequired";
+  static message = "Upgrade Required";
+  static phrase = "Upgrade required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(426, message, properties);
@@ -302,10 +302,10 @@ export class UpgradeRequiredError extends HttpError {
 }
 
 export class PreconditionRequiredError extends HttpError {
-  static status: number = 428;
-  static error: string = "PreconditionRequired";
-  static message: string = "Precondition Required";
-  static phrase: string = "Precondition required.";
+  static status = 428;
+  static error = "PreconditionRequired";
+  static message = "Precondition Required";
+  static phrase = "Precondition required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(428, message, properties);
@@ -314,10 +314,10 @@ export class PreconditionRequiredError extends HttpError {
 }
 
 export class TooManyRequestsError extends HttpError {
-  static status: number = 429;
-  static error: string = "TooManyRequests";
-  static message: string = "Too Many Requests";
-  static phrase: string = "Too many requests.";
+  static status = 429;
+  static error = "TooManyRequests";
+  static message = "Too Many Requests";
+  static phrase = "Too many requests.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(429, message, properties);
@@ -326,10 +326,10 @@ export class TooManyRequestsError extends HttpError {
 }
 
 export class RequestHeaderFieldsTooLargeError extends HttpError {
-  static status: number = 431;
-  static error: string = "RequestHeaderFieldsTooLarge";
-  static message: string = "Request Header Fields Too Large";
-  static phrase: string = "Request header fields too large.";
+  static status = 431;
+  static error = "RequestHeaderFieldsTooLarge";
+  static message = "Request Header Fields Too Large";
+  static phrase = "Request header fields too large.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(431, message, properties);
@@ -338,10 +338,10 @@ export class RequestHeaderFieldsTooLargeError extends HttpError {
 }
 
 export class UnavailableForLegalReasonsError extends HttpError {
-  static status: number = 451;
-  static error: string = "UnavailableForLegalReasons";
-  static message: string = "Unavailable For Legal Reasons";
-  static phrase: string = "Unavailable for legal reasons.";
+  static status = 451;
+  static error = "UnavailableForLegalReasons";
+  static message = "Unavailable For Legal Reasons";
+  static phrase = "Unavailable for legal reasons.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(451, message, properties);
@@ -350,10 +350,10 @@ export class UnavailableForLegalReasonsError extends HttpError {
 }
 
 export class InternalServerError extends HttpError {
-  static status: number = 500;
-  static error: string = "InternalServerError";
-  static message: string = "Internal Server Error";
-  static phrase: string = "Internal server error.";
+  static status = 500;
+  static error = "InternalServerError";
+  static message = "Internal Server Error";
+  static phrase = "Internal server error.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(500, message, properties);
@@ -362,10 +362,10 @@ export class InternalServerError extends HttpError {
 }
 
 export class NotImplementedError extends HttpError {
-  static status: number = 501;
-  static error: string = "NotImplemented";
-  static message: string = "Not Implemented";
-  static phrase: string = "Not implemented.";
+  static status = 501;
+  static error = "NotImplemented";
+  static message = "Not Implemented";
+  static phrase = "Not implemented.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(501, message, properties);
@@ -374,10 +374,10 @@ export class NotImplementedError extends HttpError {
 }
 
 export class BadGatewayError extends HttpError {
-  static status: number = 502;
-  static error: string = "BadGateway";
-  static message: string = "Bad Gateway";
-  static phrase: string = "Bad gateway.";
+  static status = 502;
+  static error = "BadGateway";
+  static message = "Bad Gateway";
+  static phrase = "Bad gateway.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(502, message, properties);
@@ -386,10 +386,10 @@ export class BadGatewayError extends HttpError {
 }
 
 export class ServiceUnavailableError extends HttpError {
-  static status: number = 503;
-  static error: string = "ServiceUnavailable";
-  static message: string = "Service Unavailable";
-  static phrase: string = "Service unavailable.";
+  static status = 503;
+  static error = "ServiceUnavailable";
+  static message = "Service Unavailable";
+  static phrase = "Service unavailable.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(503, message, properties);
@@ -398,10 +398,10 @@ export class ServiceUnavailableError extends HttpError {
 }
 
 export class GatewayTimeoutError extends HttpError {
-  static status: number = 504;
-  static error: string = "GatewayTimeout";
-  static message: string = "Gateway Timeout";
-  static phrase: string = "Gateway timeout.";
+  static status = 504;
+  static error = "GatewayTimeout";
+  static message = "Gateway Timeout";
+  static phrase = "Gateway timeout.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(504, message, properties);
@@ -410,10 +410,10 @@ export class GatewayTimeoutError extends HttpError {
 }
 
 export class HTTPVersionNotSupportedError extends HttpError {
-  static status: number = 505;
-  static error: string = "HTTPVersionNotSupported";
-  static message: string = "HTTP Version Not Supported";
-  static phrase: string = "Http version not supported.";
+  static status = 505;
+  static error = "HTTPVersionNotSupported";
+  static message = "HTTP Version Not Supported";
+  static phrase = "Http version not supported.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(505, message, properties);
@@ -422,10 +422,10 @@ export class HTTPVersionNotSupportedError extends HttpError {
 }
 
 export class VariantAlsoNegotiatesError extends HttpError {
-  static status: number = 506;
-  static error: string = "VariantAlsoNegotiates";
-  static message: string = "Variant Also Negotiates";
-  static phrase: string = "Variant also negotiates.";
+  static status = 506;
+  static error = "VariantAlsoNegotiates";
+  static message = "Variant Also Negotiates";
+  static phrase = "Variant also negotiates.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(506, message, properties);
@@ -434,10 +434,10 @@ export class VariantAlsoNegotiatesError extends HttpError {
 }
 
 export class InsufficientStorageError extends HttpError {
-  static status: number = 507;
-  static error: string = "InsufficientStorage";
-  static message: string = "Insufficient Storage";
-  static phrase: string = "Insufficient storage.";
+  static status = 507;
+  static error = "InsufficientStorage";
+  static message = "Insufficient Storage";
+  static phrase = "Insufficient storage.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(507, message, properties);
@@ -446,10 +446,10 @@ export class InsufficientStorageError extends HttpError {
 }
 
 export class LoopDetectedError extends HttpError {
-  static status: number = 508;
-  static error: string = "LoopDetected";
-  static message: string = "Loop Detected";
-  static phrase: string = "Loop detected.";
+  static status = 508;
+  static error = "LoopDetected";
+  static message = "Loop Detected";
+  static phrase = "Loop detected.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(508, message, properties);
@@ -458,10 +458,10 @@ export class LoopDetectedError extends HttpError {
 }
 
 export class BandwidthLimitExceededError extends HttpError {
-  static status: number = 509;
-  static error: string = "BandwidthLimitExceeded";
-  static message: string = "Bandwidth Limit Exceeded";
-  static phrase: string = "Bandwidth limit exceeded.";
+  static status = 509;
+  static error = "BandwidthLimitExceeded";
+  static message = "Bandwidth Limit Exceeded";
+  static phrase = "Bandwidth limit exceeded.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(509, message, properties);
@@ -470,10 +470,10 @@ export class BandwidthLimitExceededError extends HttpError {
 }
 
 export class NotExtendedError extends HttpError {
-  static status: number = 510;
-  static error: string = "NotExtended";
-  static message: string = "Not Extended";
-  static phrase: string = "Not extended.";
+  static status = 510;
+  static error = "NotExtended";
+  static message = "Not Extended";
+  static phrase = "Not extended.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(510, message, properties);
@@ -482,10 +482,10 @@ export class NotExtendedError extends HttpError {
 }
 
 export class NetworkAuthenticationRequiredError extends HttpError {
-  static status: number = 511;
-  static error: string = "NetworkAuthenticationRequired";
-  static message: string = "Network Authentication Required";
-  static phrase: string = "Network authentication required.";
+  static status = 511;
+  static error = "NetworkAuthenticationRequired";
+  static message = "Network Authentication Required";
+  static phrase = "Network authentication required.";
 
   constructor(message?: string | GenericObject, properties?: GenericObject) {
     super(511, message, properties);
