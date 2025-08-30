@@ -1,6 +1,6 @@
 import { type ShopOutput } from "@dataTypes/shop.types.js";
 import { ShopModel } from "@shop/models/shop.model.js";
-import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
+import { InternalServerError } from "@sazk/http-errors-enhanced";
 import type { NextFunction, Request, Response } from "express";
 
 export const getAllShops = async (

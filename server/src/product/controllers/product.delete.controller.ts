@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { ProductModel } from "@product/models/product.model.js";
-import { GoneError } from "@utils/http-errors-enhanced/errors.js";
+import { GoneError } from "@sazk/http-errors-enhanced";
 
 export const deleteProduct = async (
   req: Request,

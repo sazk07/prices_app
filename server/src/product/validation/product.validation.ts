@@ -1,4 +1,4 @@
-import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
+import { InternalServerError } from "@sazk/http-errors-enhanced";
 import { validateId, validateRequest } from "@utils/validation.js";
 import type { NextFunction, Request, Response } from "express";
 import { z, ZodError } from "zod";

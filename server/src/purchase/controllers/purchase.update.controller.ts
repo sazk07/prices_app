@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { PurchaseModel } from "@purchase/models/purchase.model.js";
-import { NotFoundError } from "@utils/http-errors-enhanced/errors.js";
+import { NotFoundError } from "@sazk/http-errors-enhanced";
 
 export const updatePurchase = async (
   req: Request,

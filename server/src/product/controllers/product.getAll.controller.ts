@@ -1,6 +1,6 @@
 import { type ProductOutput } from "@dataTypes/product.types.js";
 import { ProductModel } from "@product/models/product.model.js";
-import { InternalServerError } from "@utils/http-errors-enhanced/errors.js";
+import { InternalServerError } from "@sazk/http-errors-enhanced";
 import type { NextFunction, Request, Response } from "express";
 
 export const getAllProducts = async (

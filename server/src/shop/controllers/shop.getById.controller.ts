@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { NotFoundError } from "@utils/http-errors-enhanced/errors.js";
+import { NotFoundError } from "@sazk/http-errors-enhanced";
 import { ShopModel } from "@shop/models/shop.model.js";
 import { type ShopOutput } from "@dataTypes/shop.types.js";
 
