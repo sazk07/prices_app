@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
+import { PurchaseModel } from "../models/purchase.model.js";
 import { InternalServerError } from "@sazk/http-errors-enhanced";
-import { type PurchaseView } from "@dataTypes/purchase.types.js";
+import { type PurchaseView } from "../../../../shared/src/types/purchase.types.js";
 
 export const getAllPurchases = async (
   _req: Request,

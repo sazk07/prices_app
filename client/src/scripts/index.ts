@@ -1,5 +1,5 @@
 import "@/css/style.css";
-import { type HomeResponse } from "@dataTypes/home.types";
+import { type HomeResponse } from "../../../shared/src/types/home.types";
 import { getData } from "@/scripts/utils/fetchData";
 import { createNav } from "@/scripts/utils/nav";
 

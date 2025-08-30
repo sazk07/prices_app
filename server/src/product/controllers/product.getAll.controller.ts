@@ -1,5 +1,5 @@
-import { type ProductOutput } from "@dataTypes/product.types.js";
-import { ProductModel } from "@product/models/product.model.js";
+import { type ProductOutput } from "../../../../shared/src/types/product.types.js";
+import { ProductModel } from "../models/product.model.js";
 import { InternalServerError } from "@sazk/http-errors-enhanced";
 import type { NextFunction, Request, Response } from "express";
 

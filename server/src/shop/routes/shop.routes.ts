@@ -1,12 +1,12 @@
-import { createShop } from "@shop/controllers/shop.create.controller.js";
-import { deleteShop } from "@shop/controllers/shop.delete.controller.js";
-import { getAllShops } from "@shop/controllers/shop.getAll.controller.js";
-import { getShopById } from "@shop/controllers/shop.getById.controller.js";
-import { updateShop } from "@shop/controllers/shop.update.controller.js";
+import { createShop } from "../controllers/shop.create.controller.js";
+import { deleteShop } from "../controllers/shop.delete.controller.js";
+import { getAllShops } from "../controllers/shop.getAll.controller.js";
+import { getShopById } from "../controllers/shop.getById.controller.js";
+import { updateShop } from "../controllers/shop.update.controller.js";
 import {
   validateShopData,
   validateShopId,
-} from "@shop/validation/shop.validation.js";
+} from "../validation/shop.validation.js";
 import { Router } from "express";
 
 const shopRouter = Router();

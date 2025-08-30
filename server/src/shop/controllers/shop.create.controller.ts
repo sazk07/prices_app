@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { ShopModel } from "@shop/models/shop.model.js";
+import { ShopModel } from "../models/shop.model.js";
 
 export const createShop = async (
   req: Request,

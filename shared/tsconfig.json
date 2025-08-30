@@ -12,12 +12,7 @@
     ],
     "declaration": true,
     "declarationMap": true,
-    "composite": true,
-    "paths": {
-      "@dataTypes/*": [
-        "./src/types/*"
-      ]
-    }
+    "composite": true
   },
   "include": [
     "src/**/*.ts"

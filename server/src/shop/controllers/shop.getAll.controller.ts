@@ -1,5 +1,5 @@
-import { type ShopOutput } from "@dataTypes/shop.types.js";
-import { ShopModel } from "@shop/models/shop.model.js";
+import { type ShopOutput } from "../../../../shared/src/types/shop.types.js";
+import { ShopModel } from "../models/shop.model.js";
 import { InternalServerError } from "@sazk/http-errors-enhanced";
 import type { NextFunction, Request, Response } from "express";
 

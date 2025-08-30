@@ -1,9 +1,12 @@
-import "@/css/style.css";
-import "@/css/tableStyle.css";
-import { getData } from "@/scripts/utils/fetchData";
-import { createNav } from "@/scripts/utils/nav";
-import { type ShopOutput } from "@dataTypes/shop.types";
-import type { Column, SortState } from "@dataTypes/generics.types";
+import "../../css/style.css";
+import "../../css/tableStyle.css";
+import { getData } from "../utils/fetchData";
+import { createNav } from "../utils/nav";
+import { type ShopOutput } from "../../../../shared/src/types/shop.types";
+import type {
+  Column,
+  SortState,
+} from "../../../../shared/src/types/generics.types";
 import { getKeys } from "../utils/getkeys";
 import {
   createTableBody,

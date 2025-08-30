@@ -1,12 +1,12 @@
-import { createPurchase } from "@purchase/controllers/purchase.create.controller.js";
-import { deletePurchase } from "@purchase/controllers/purchase.delete.controller.js";
-import { getAllPurchases } from "@purchase/controllers/purchase.getAll.controller.js";
-import { getPurchaseById } from "@purchase/controllers/purchase.getById.controller.js";
-import { updatePurchase } from "@purchase/controllers/purchase.update.controller.js";
+import { createPurchase } from "../controllers/purchase.create.controller.js";
+import { deletePurchase } from "../controllers/purchase.delete.controller.js";
+import { getAllPurchases } from "../controllers/purchase.getAll.controller.js";
+import { getPurchaseById } from "../controllers/purchase.getById.controller.js";
+import { updatePurchase } from "../controllers/purchase.update.controller.js";
 import {
   validatePurchaseData,
   validatePurchaseId,
-} from "@purchase/validation/purchase.validation.js";
+} from "../validation/purchase.validation.js";
 import { Router } from "express";
 
 const purchaseRouter = Router();

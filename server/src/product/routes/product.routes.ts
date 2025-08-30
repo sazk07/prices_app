@@ -1,12 +1,12 @@
-import { createProduct } from "@product/controllers/product.create.controller.js";
-import { deleteProduct } from "@product/controllers/product.delete.controller.js";
-import { getAllProducts } from "@product/controllers/product.getAll.controller.js";
-import { getProductById } from "@product/controllers/product.getById.controller.js";
-import { updateProduct } from "@product/controllers/product.update.controller.js";
+import { createProduct } from "../controllers/product.create.controller.js";
+import { deleteProduct } from "../controllers/product.delete.controller.js";
+import { getAllProducts } from "../controllers/product.getAll.controller.js";
+import { getProductById } from "../controllers/product.getById.controller.js";
+import { updateProduct } from "../controllers/product.update.controller.js";
 import {
   validateProductData,
   validateProductId,
-} from "@product/validation/product.validation.js";
+} from "../validation/product.validation.js";
 import { Router } from "express";
 
 const productRouter = Router();

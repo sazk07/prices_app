@@ -1,6 +1,6 @@
-import "@/css/style.css";
+import "../../css/style.css";
 import { createNav } from "../utils/nav";
-import { type ProductOutput } from "@dataTypes/product.types";
+import { type ProductOutput } from "../../../../shared/src/types/product.types";
 import { getData } from "../utils/fetchData";
 
 const productId = new URLSearchParams(window.location.search).get("productId");

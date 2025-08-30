@@ -1,13 +1,13 @@
 import type { NextFunction, Request, Response } from "express";
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
+import { PurchaseModel } from "../../purchase/models/purchase.model.js";
 import { NotFoundError } from "@sazk/http-errors-enhanced";
 import {
   getCountOfProducts,
   getCountOfPurchases,
   getCountOfShops,
-} from "@utils/home.utils.js";
-import { ShopModel } from "@shop/models/shop.model.js";
-import { ProductModel } from "@product/models/product.model.js";
+} from "../../utils/home.utils.js";
+import { ShopModel } from "../../shop/models/shop.model.js";
+import { ProductModel } from "../../product/models/product.model.js";
 
 export const homePage = async (
   _req: Request,

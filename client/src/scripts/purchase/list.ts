@@ -1,7 +1,13 @@
-import "@/css/style.css";
-import "@/css/tableStyle.css";
-import type { Column, SortState } from "@dataTypes/generics.types";
-import type { PurchaseOutput, PurchaseView } from "@dataTypes/purchase.types";
+import "../../css/style.css";
+import "../../css/tableStyle.css";
+import type {
+  Column,
+  SortState,
+} from "../../../../shared/src/types/generics.types";
+import type {
+  PurchaseOutput,
+  PurchaseView,
+} from "../../../../shared/src/types/purchase.types";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
 import {

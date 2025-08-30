@@ -4,10 +4,10 @@ import productRouter from "./product/routes/product.routes.js";
 import purchaseRouter from "./purchase/routes/purchase.routes.js";
 import notFoundRouter from "./utils/notFound.routes.js";
 import { logError, errorHandler } from "./utils/errorHandler.js";
-import connectToDatabase from "@configs/database.js";
+import connectToDatabase from "./config/database.js";
 import homePageRouter from "./home/routes/home.routes.js";
 import cors from "cors";
-import { corsOptions } from "@utils/corsOptions.js";
+import { corsOptions } from "./utils/corsOptions.js";
 
 const app = express();
 

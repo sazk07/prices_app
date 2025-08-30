@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { NotFoundError } from "@sazk/http-errors-enhanced";
-import { ShopModel } from "@shop/models/shop.model.js";
+import { ShopModel } from "../models/shop.model.js";
 
 export const updateShop = async (
   req: Request,

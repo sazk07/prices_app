@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { ProductModel } from "@product/models/product.model.js";
+import { ProductModel } from "../models/product.model.js";
 import { type ProductOutput } from "@dataTypes/product.types.js";
 
 export const getProductById = async (

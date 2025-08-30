@@ -1,5 +1,5 @@
-import connectToDatabase from "@configs/database.js";
-import { ModelError } from "@utils/model.error.js";
+import connectToDatabase from "../../config/database.js";
+import { ModelError } from "../../utils/model.error.js";
 
 export const ShopModel = async () => {
   try {

@@ -1,4 +1,4 @@
-import "@/css/style.css";
+import "../../css/style.css";
 
 const form = document.querySelector("form") as HTMLFormElement;
 form.addEventListener("submit", async (e) => {

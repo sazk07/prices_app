@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { GoneError } from "@sazk/http-errors-enhanced";
-import { ShopModel } from "@shop/models/shop.model.js";
+import { ShopModel } from "../models/shop.model.js";
 
 export const deleteShop = async (
   req: Request,

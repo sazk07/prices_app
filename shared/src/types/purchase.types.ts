@@ -1,5 +1,5 @@
-import { Product } from "./product.types.js";
-import { Shop } from "./shop.types.js";
+import { type Product } from "./product.types.js";
+import { type Shop } from "./shop.types.js";
 
 export interface Purchase {
   purchaseId: number;

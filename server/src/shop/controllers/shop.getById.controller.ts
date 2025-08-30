@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { NotFoundError } from "@sazk/http-errors-enhanced";
-import { ShopModel } from "@shop/models/shop.model.js";
-import { type ShopOutput } from "@dataTypes/shop.types.js";
+import { ShopModel } from "../models/shop.model.js";
+import { type ShopOutput } from "../../../../shared/src/types/shop.types.js";
 
 export const getShopById = async (
   req: Request,

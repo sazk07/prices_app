@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { PurchaseModel } from "@purchase/models/purchase.model.js";
+import { PurchaseModel } from "../models/purchase.model.js";
 import { GoneError } from "@sazk/http-errors-enhanced";
 
 export const deletePurchase = async (

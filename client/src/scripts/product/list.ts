@@ -1,14 +1,17 @@
-import "@/css/style.css";
-import "@/css/tableStyle.css";
+import "../../css/style.css";
+import "../../css/tableStyle.css";
 import { getData } from "../utils/fetchData";
 import { createNav } from "../utils/nav";
-import { type ProductOutput } from "@dataTypes/product.types";
+import { type ProductOutput } from "../../../../shared/src/types/product.types";
 import {
   createTableHeadersList,
   createTableBody,
   sortTable as sortTable,
 } from "../utils/tableUtils";
-import type { Column, SortState } from "@dataTypes/generics.types";
+import type {
+  Column,
+  SortState,
+} from "../../../../shared/src/types/generics.types";
 import { getKeys } from "../utils/getkeys";
 
 const LINK_COLUMN: Column<ProductOutput> = {

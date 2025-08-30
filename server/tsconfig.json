@@ -6,26 +6,6 @@
     }
   ],
   "compilerOptions": {
-    "paths": {
-      "@dataTypes/*": [
-        "../shared/src/types/*"
-      ],
-      "@shop/*": [
-        "./src/shop/*"
-      ],
-      "@product/*": [
-        "./src/product/*"
-      ],
-      "@configs/*": [
-        "./src/config/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@purchase/*": [
-        "./src/purchase/*"
-      ]
-    },
     "module": "nodenext",
     "lib": [
       "es2024",

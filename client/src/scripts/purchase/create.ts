@@ -1,7 +1,7 @@
 import "../../css/style.css";
-import { type ProductOutput } from "@dataTypes/product.types";
+import { type ProductOutput } from "../../../../shared/src/types/product.types";
 import { getData } from "../utils/fetchData";
-import { type ShopOutput } from "@dataTypes/shop.types";
+import { type ShopOutput } from "../../../../shared/src/types/shop.types";
 
 const productList: ProductOutput[] = await getData(
   "http://localhost:3000/products",

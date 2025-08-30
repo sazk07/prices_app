@@ -1,4 +1,4 @@
-import "@/css/style.css";
+import "../../css/style.css";
 
 // create a function that creates a nav element
 export const createNav = () => {
